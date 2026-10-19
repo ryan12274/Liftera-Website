@@ -15,9 +15,43 @@ footer>div:first-child{display:flex;align-items:center;gap:24px}footer>div:first
 .success-page{min-height:100vh;max-width:900px;margin:auto;padding:18vh 8vw}.success-page h1{font-size:clamp(70px,10vw,140px);margin-bottom:28px}.success-page h1 span{color:#8c8c87}.success-page p:not(.eyebrow){color:var(--muted);max-width:500px;margin-bottom:30px}
 @media(max-width:650px){.waitlist-form{flex-direction:column}.waitlist-form .button{width:100%}.safety-grid{grid-template-columns:1fr}.safety-grid>div{border-right:0}.spec-row{grid-template-columns:1fr;gap:8px}.spec-row strong{font-size:13px}.footer-waitlist{display:none}}
 
-/* Logo rendering fix */
-.site-header .brand{display:flex!important;align-items:center!important;justify-content:flex-start!important;width:150px!important;height:47px!important;min-width:150px!important;max-width:150px!important;overflow:visible!important;padding:0!important;margin:0!important;line-height:0!important}
-.site-header .brand img{display:block!important;width:150px!important;height:auto!important;min-width:150px!important;max-width:150px!important;max-height:none!important;object-fit:contain!important;object-position:left center!important;margin:0!important;padding:0!important}
-footer>div:first-child{display:flex;align-items:center;gap:24px;overflow:visible!important}
-footer>div:first-child img{display:block!important;width:130px!important;height:auto!important;min-width:130px!important;max-width:130px!important;max-height:none!important;object-fit:contain!important;object-position:left center!important;margin:0!important;padding:0!important}
-@media(max-width:520px){.site-header .brand{width:125px!important;min-width:125px!important;max-width:125px!important;height:40px!important}.site-header .brand img{width:125px!important;min-width:125px!important;max-width:125px!important}}
+
+/* Final header logo sizing */
+.site-header .brand{
+  display:flex;
+  align-items:center;
+  flex:0 0 auto;
+  width:auto;
+  height:auto;
+  overflow:visible;
+  padding:0;
+  margin:0;
+  line-height:0;
+}
+.site-header .brand img{
+  display:block;
+  width:150px;
+  height:auto;
+  max-width:none;
+  max-height:none;
+  object-fit:initial;
+  margin:0;
+  padding:0;
+}
+footer>div:first-child{
+  display:flex;
+  align-items:center;
+  gap:24px;
+  overflow:visible;
+}
+footer>div:first-child img{
+  display:block;
+  width:130px;
+  height:auto;
+  max-width:none;
+  max-height:none;
+  object-fit:initial;
+}
+@media(max-width:520px){
+  .site-header .brand img{width:125px}
+}
