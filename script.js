@@ -42,6 +42,7 @@ if('IntersectionObserver' in window){
   const unlock = () => {
     document.body.classList.remove('launch-locked');
     gate.setAttribute('aria-hidden','true');
+    gate.style.display = 'none';
     sessionStorage.setItem('liftera-launch-unlocked','1');
     input.value = '';
   };
