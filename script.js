@@ -22,3 +22,40 @@ if('IntersectionObserver' in window){
 }else{
   document.querySelectorAll('.reveal,.reveal-stagger').forEach(el=>el.classList.add('is-visible'));
 }
+
+/* Private product-page launch gate */
+(() => {
+  const gate = document.getElementById('launchGate');
+  const form = document.getElementById('launchUnlockForm');
+  const input = document.getElementById('launchPassword');
+  const error = document.getElementById('launchError');
+  if (!gate || !form) return;
+
+  const passwordHash = 'a300e5762cfb19c51d90e2e97989097b02d55e340ee30e468629e237abc64a6a';
+
+  const hash = async (value) => {
+    const data = new TextEncoder().encode(value);
+    const digest = await crypto.subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(digest)).map(b=>b.toString(16).padStart(2,'0')).join('');
+  };
+
+  const unlock = () => {
+    document.body.classList.remove('launch-locked');
+    gate.setAttribute('aria-hidden','true');
+    sessionStorage.setItem('liftera-launch-unlocked','1');
+    input.value = '';
+  };
+
+  if (sessionStorage.getItem('liftera-launch-unlocked') === '1') unlock();
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    error.textContent = '';
+    if (await hash(input.value) === passwordHash) {
+      unlock();
+    } else {
+      error.textContent = 'Incorrect password.';
+      input.select();
+    }
+  });
+})();
