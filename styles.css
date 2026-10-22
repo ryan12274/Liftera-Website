@@ -117,3 +117,35 @@ nav a:hover:after{right:0}
 }
 
 .brand-sheet-type{font-family:"Alata",Inter,sans-serif}
+
+/* Private product-page launch gate */
+.launch-locked{overflow:hidden}
+.launch-locked .site-header,
+.launch-locked main,
+.launch-locked footer{visibility:hidden}
+.launch-gate{
+  position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;
+  padding:24px;background:
+  radial-gradient(circle at 50% 35%,rgba(72,209,204,.08),transparent 35%),
+  #101010;
+}
+.launch-gate-card{
+  width:min(560px,100%);padding:56px 48px;border:1px solid #2b2b29;background:#171717;
+  box-shadow:0 25px 80px rgba(0,0,0,.45);text-align:left;
+}
+.launch-gate-card h1{margin:8px 0 18px;font-family:"Barlow Condensed",sans-serif;font-size:clamp(64px,10vw,110px);line-height:.82;letter-spacing:-.03em}
+.launch-gate-card h1 span{color:var(--cyan)}
+.launch-gate-card>p:not(.eyebrow){color:var(--muted);margin-bottom:28px}
+.launch-gate-card label{display:block;margin-bottom:8px;font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:#94948f}
+.launch-password-row{display:flex;gap:10px}
+.launch-password-row input{
+  flex:1;min-width:0;background:#101010;border:1px solid #363633;color:#f3f2ee;
+  padding:14px 16px;font:inherit;outline:none;
+}
+.launch-password-row input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(72,209,204,.08)}
+.launch-password-row .button{white-space:nowrap}
+.launch-error{min-height:18px;margin:12px 0 0;color:#d86b6b;font-size:12px}
+@media(max-width:520px){
+  .launch-gate-card{padding:38px 24px}
+  .launch-password-row{flex-direction:column}
+}
