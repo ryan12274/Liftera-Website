@@ -243,3 +243,18 @@ nav a:hover:after{right:0}
  .process-grid{grid-template-columns:1fr}.process-grid>div{border-right:0;border-bottom:1px solid var(--line);min-height:150px}.process-grid h3{margin-top:30px}
  .proof-grid{gap:30px}.editorial-cta h2{font-size:clamp(72px,20vw,125px)}
 }
+
+/* Supporters page */
+.supporters-hero{min-height:72vh}
+.supporter-intro-card{padding:48px;background:var(--panel);border:1px solid var(--line)}
+.supporter-intro-card h2{font-size:clamp(46px,5.5vw,72px)}
+.supporter-intro-card p:last-child{color:var(--muted);font-size:14px;margin-top:24px}
+.supporter-list{border-top:1px solid var(--line)}
+.supporter-card{display:grid;grid-template-columns:70px 1fr;gap:25px;padding:38px 0;border-bottom:1px solid var(--line)}
+.supporter-number{font:700 15px "Barlow Condensed";color:#777770}
+.supporter-card h3{font-size:34px}
+.supporter-type{margin:0 0 10px;color:var(--cyan);font-size:10px;font-weight:700;letter-spacing:.18em}
+.supporter-card p:last-child{color:var(--muted);font-size:14px;margin:12px 0 0}
+.supporter-placeholder{opacity:.65}
+.supporter-types .feature-grid{margin-top:10px}
+@media(max-width:800px){.supporter-intro-card{padding:32px}.supporter-card{grid-template-columns:45px 1fr}}
