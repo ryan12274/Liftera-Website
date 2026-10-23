@@ -258,3 +258,10 @@ nav a:hover:after{right:0}
 .supporter-placeholder{opacity:.65}
 .supporter-types .feature-grid{margin-top:10px}
 @media(max-width:800px){.supporter-intro-card{padding:32px}.supporter-card{grid-template-columns:45px 1fr}}
+
+.supporter-banners{display:grid;gap:18px}
+.supporter-banner{min-height:170px;padding:34px 42px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:linear-gradient(110deg,#171717,#20201e);border:1px solid var(--line);position:relative;overflow:hidden}
+.supporter-banner:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(72,209,204,.09),transparent 55%);pointer-events:none}
+.supporter-banner-mark{position:relative;color:var(--cyan);font-size:9px;font-weight:700;letter-spacing:.24em;margin-bottom:12px}
+.supporter-banner-name{position:relative;font:700 clamp(34px,5vw,64px)/.9 "Barlow Condensed",Impact,sans-serif;letter-spacing:.02em;text-transform:uppercase}
+.supporter-banner-note{position:relative;margin-top:14px;color:var(--muted);font-size:12px}
