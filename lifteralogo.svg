@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1260 390" role="img" aria-labelledby="title">
+  <title id="title">LIFTERA</title>
+  <path fill="#1d1d1b" d="M0 0h1260v390H0z"/>
+  <g fill="none" stroke="#f3f2ee" stroke-width="8"><path d="M6 6h1248v378H6zM416 6v378"/></g>
+  <g fill="#f3f2ee" font-family="Arial, Helvetica, sans-serif" font-weight="900">
+    <text x="104" y="278" font-size="224" letter-spacing="-12">LF</text>
+    <text x="490" y="278" font-size="200" textLength="666" lengthAdjust="spacingAndGlyphs">LIFTERA</text>
+  </g>
+</svg>
