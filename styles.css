@@ -347,3 +347,81 @@ h1,h2,h3,.faq summary,.supporter-banner-name{font-family:var(--font-heading),Ari
  .editorial-cta h2{font-size:clamp(46px,13vw,78px)}
  .editorial-statement h2,.stage-copy h2,.feature-intro h2,.process-heading h2,.proof-copy h2,.editorial-faq h2{font-size:clamp(32px,8vw,46px)}
 }
+
+/* A quieter homepage: consistent widths, fewer dividers, one signup destination. */
+.clean-home{background:#101010}
+.clean-home .site-header{height:84px;padding-inline:max(24px,calc((100vw - 1180px)/2));background:rgba(16,16,16,.96);animation:none}
+.clean-home .site-header .brand img{width:132px}
+.clean-home .header-cta{border-color:#414141;letter-spacing:.04em;text-transform:none;font-size:12px;padding:10px 18px}
+.clean-home .editorial-home>section{max-width:1180px;margin-inline:auto;padding-inline:32px}
+.clean-home .editorial-hero{padding-top:84px;padding-bottom:80px;border-bottom:0}
+.clean-home .hero-title-wrap{margin:0;padding:0 0 28px}
+.clean-home .eyebrow{font-size:11px;letter-spacing:.14em;color:#a6aaa8;margin-bottom:18px}
+.clean-home .editorial-hero h1{font-size:clamp(48px,7.6vw,104px);line-height:1.07;letter-spacing:-.02em;margin:0}
+.clean-home .hero-bottom{display:flex;flex-direction:column;align-items:flex-start;gap:28px;border:0;padding:0}
+.clean-home .hero-bottom>p{max-width:510px;font-size:16px;line-height:1.75}
+.clean-home .hero-actions{align-items:center;gap:24px}
+.clean-home .hero-actions>.button{display:inline-flex;align-items:center;justify-content:center}
+.clean-home .button{padding:15px 22px;border-radius:3px;letter-spacing:.04em;text-transform:none;font-size:13px;min-height:48px}
+.clean-home .button-primary:hover{transform:none;background:#75ded9;box-shadow:none}
+.clean-home .text-link{border:0;text-transform:none;font-size:13px;letter-spacing:0;padding-block:10px;color:#c3c7c4}
+.clean-home .hero-note{color:#999e9a;font-size:12px;margin:18px 0 0}
+.clean-home .editorial-product-stage,.clean-home .editorial-feature,.clean-home .editorial-process,.clean-home .editorial-proof,.clean-home .editorial-faq{padding-block:72px;border-bottom:1px solid #282b29}
+.clean-home .editorial-product-stage{border-top:1px solid #282b29}
+.clean-home .stage-grid{margin-top:0;gap:64px;grid-template-columns:1fr 1fr}
+.clean-home .stage-copy h2,.clean-home .feature-intro h2,.clean-home .process-heading h2,.clean-home .proof-copy h2,.clean-home .editorial-faq h2{font-size:clamp(32px,3.5vw,48px);line-height:1.14;margin:0 0 24px}
+.clean-home .stage-render{min-height:440px;background:#161917;border:1px solid #2b302c;border-radius:6px}
+.clean-home .stage-render .chain{height:110px}
+.clean-home .stage-render .carabiner{top:calc(43% + 180px)}
+.clean-home .stage-render .product-note{font:10px Alata,sans-serif;letter-spacing:.02em;bottom:14px}
+.clean-home .launch-status{font-size:12px!important;line-height:1.6!important;padding:0;background:none;border:0;max-width:44ch}
+.clean-home .launch-status strong{color:var(--cyan);font-weight:400}
+.clean-home .editorial-feature,.clean-home .editorial-faq{display:grid;grid-template-columns:1fr 1.3fr;gap:64px}
+.clean-home .feature-intro,.clean-home .editorial-list,.clean-home .editorial-faq .faq{grid-column:auto}
+.clean-home .editorial-list article{grid-template-columns:1fr;padding:24px 0}
+.clean-home .editorial-list article>span{display:none}
+.clean-home .editorial-list h3{font-size:23px;margin-bottom:10px}
+.clean-home .editorial-list p{font-size:14px;line-height:1.7}
+.clean-home .editorial-process{display:block}
+.clean-home .process-grid{margin-top:32px;gap:28px;border:0}
+.clean-home .process-grid>div{padding:22px 0 0;border:0;border-top:1px solid #343936;min-height:0}
+.clean-home .process-grid h3{margin:22px 0 12px;font-size:23px}
+.clean-home .process-grid p{font-size:14px;line-height:1.7}
+.clean-home .editorial-proof{display:block;background:none}
+.clean-home .proof-grid{gap:64px;grid-template-columns:1fr 1fr}
+.clean-home .proof-photo{border:0;border-radius:6px}
+.clean-home .proof-note{font-size:11px!important;color:#929892!important}
+.clean-home .faq summary{font-family:Alata,Arial,sans-serif;font-size:16px;font-weight:400;text-transform:none;line-height:1.5;padding-right:24px;position:relative}
+.clean-home .faq summary:after{position:absolute;right:0;top:0}
+.clean-home .faq details p{font-size:14px;line-height:1.7}
+.clean-home .editorial-cta{background:none;padding-top:90px;padding-bottom:96px}
+.clean-home .editorial-cta h2{font-size:clamp(44px,5vw,68px);line-height:1.1;letter-spacing:-.02em;margin:0 0 24px}
+.clean-home .waitlist-form input{background:#171b18;border-color:#3b423d;border-radius:3px}
+.clean-home .signup-final{gap:10px;max-width:530px}
+.clean-home .signup-label{margin-bottom:2px}
+.clean-home footer{max-width:1180px;margin:auto;padding:32px;gap:24px;flex-wrap:wrap}
+.clean-home footer>div:first-child img{width:100px}
+.clean-home .footer-links{font-size:12px}
+@media(max-width:900px){
+ .clean-home .stage-grid,.clean-home .editorial-feature,.clean-home .editorial-faq,.clean-home .proof-grid{grid-template-columns:1fr;gap:36px}
+ .clean-home .process-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .clean-home .stage-render{min-height:440px}
+}
+@media(max-width:600px){
+ .clean-home .site-header{height:72px;padding-inline:20px}
+ .clean-home .site-header .brand img{width:112px}
+ .clean-home .header-cta{font-size:11px;padding:10px}
+ .clean-home .editorial-home>section{padding-inline:24px}
+ .clean-home .editorial-hero{padding-top:52px;padding-bottom:52px}
+ .clean-home .editorial-hero h1{font-size:clamp(34px,10.3vw,60px)}
+ .clean-home .hero-actions{gap:14px;flex-wrap:wrap}
+ .clean-home .hero-actions>.button{display:inline-flex}
+ .clean-home .hero-bottom>p{font-size:15px}
+ .clean-home .editorial-product-stage,.clean-home .editorial-feature,.clean-home .editorial-process,.clean-home .editorial-proof,.clean-home .editorial-faq{padding-block:48px}
+ .clean-home .stage-render{min-height:400px}
+ .clean-home .stage-render .chain{height:85px}
+ .clean-home .stage-render .carabiner{top:calc(43% + 155px);height:40px}
+ .clean-home .process-grid{gap:24px}
+ .clean-home .process-grid p{font-size:13px}
+ .clean-home .editorial-cta{padding-block:60px}
+}
