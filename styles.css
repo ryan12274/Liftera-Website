@@ -265,3 +265,62 @@ nav a:hover:after{right:0}
 .supporter-banner-mark{position:relative;color:var(--cyan);font-size:9px;font-weight:700;letter-spacing:.24em;margin-bottom:12px}
 .supporter-banner-name{position:relative;font:700 clamp(34px,5vw,64px)/.9 "Barlow Condensed",Impact,sans-serif;letter-spacing:.02em;text-transform:uppercase}
 .supporter-banner-note{position:relative;margin-top:14px;color:var(--muted);font-size:12px}
+
+/* Preview: clearer discovery and signup flow */
+:root{--muted:#b0b0a9}
+html{scroll-padding-top:100px}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--cyan);outline-offset:5px}
+.skip-link{position:fixed;top:8px;left:16px;z-index:10000;background:var(--text);color:var(--bg);padding:12px;transform:translateY(-160%)}
+.skip-link:focus{transform:none}
+.mobile-menu{display:none}
+.site-header{gap:20px}
+.site-header>nav{gap:clamp(12px,1.7vw,26px)}
+.editorial-hero{min-height:auto;padding-top:28px;padding-bottom:48px}
+.hero-title-wrap{padding:55px 0 48px}
+.editorial-hero h1{font-size:clamp(64px,10.8vw,155px);line-height:.92;letter-spacing:-.04em}
+.hero-bottom{gap:24px}
+.hero-signup{width:min(560px,100%);margin-top:26px}
+.hero-signup p,.signup-note{font-size:12px!important;line-height:1.6;color:var(--muted);margin-top:10px!important}
+.waitlist-form input{font-size:16px;min-height:48px}
+.waitlist-form input::placeholder{color:#aaa}
+.button{border:0;cursor:pointer;min-height:46px;text-align:center;font-family:inherit}
+.button-primary{background:var(--cyan);color:#101010}
+.header-cta{white-space:nowrap;min-height:44px;display:flex;align-items:center}
+.launch-status{padding:16px 18px;border-left:2px solid var(--cyan);background:#191919;margin-top:26px!important}
+.launch-status strong{color:var(--text)}
+.editorial-product-stage,.editorial-feature,.editorial-process,.editorial-proof,.editorial-faq{padding-top:72px;padding-bottom:72px}
+.editorial-statement{padding-top:75px;padding-bottom:75px}
+.stage-render .product-note{color:#aaa;font-size:10px}
+.editorial-proof{grid-template-columns:60px minmax(0,1fr)}
+.proof-grid{min-width:0}
+.signup-final{display:grid;grid-template-columns:minmax(0,1fr) auto;text-align:left}
+.signup-label{grid-column:1/-1;font-size:13px}
+.editorial-cta .signup-note{max-width:530px;margin:14px auto 0}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap;color:var(--muted)}
+.chief-bio:empty{display:none}
+@media(max-width:1050px){
+ .site-header>nav{display:none}
+ .mobile-menu{display:block;margin-left:auto}
+ .mobile-menu summary{cursor:pointer;list-style:none;padding:12px;font-size:12px}
+ .mobile-menu summary::after{content:" +";color:var(--cyan)}
+ .mobile-menu[open] summary::after{content:" −"}
+ .mobile-menu nav{display:flex;position:absolute;top:100%;left:0;right:0;background:#171717;border-bottom:1px solid var(--line);padding:20px 6vw;flex-direction:column;gap:0;box-shadow:0 18px 30px #0008}
+ .mobile-menu nav a{padding:12px 0;font-size:14px}
+}
+@media(max-width:600px){
+ .site-header{padding:0 20px;gap:6px}
+ .header-cta{font-size:9px;padding:9px}
+ .hero-title-wrap{padding:44px 0 32px}
+ .editorial-hero{min-height:auto}
+ .editorial-hero h1{font-size:clamp(42px,12vw,72px);line-height:.98}
+ .hero-bottom{gap:20px}
+ .hero-bottom .hero-actions{width:100%;align-items:center}
+ .hero-bottom .hero-actions>.button{display:none}
+ .hero-signup{margin-top:22px}
+ .editorial-proof{grid-template-columns:1fr;gap:24px}
+ .signup-final{grid-template-columns:1fr}
+ .signup-final .signup-label{grid-column:auto}
+ .editorial-cta{padding-top:80px;padding-bottom:80px}
+ .editorial-cta h2{font-size:clamp(56px,15vw,90px);line-height:.94;letter-spacing:-.03em}
+ footer>div:first-child{flex-wrap:wrap;gap:15px}
+}
