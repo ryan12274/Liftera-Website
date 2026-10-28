@@ -1,4 +1,4 @@
-document.querySelectorAll('a[href^="#"]').forEach(link=>{link.addEventListener('click',event=>{const target=document.querySelector(link.getAttribute('href'));if(!target)return;event.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'});});});
+/* Native fragment links preserve history, keyboard focus and reduced-motion settings. */
 
 /* Scroll reveal + small interaction layer */
 const revealTargets=document.querySelectorAll(
@@ -42,6 +42,7 @@ if('IntersectionObserver' in window){
   const unlock = () => {
     document.body.classList.remove('launch-locked');
     gate.setAttribute('aria-hidden','true');
+    gate.style.display = 'none';
     sessionStorage.setItem('liftera-launch-unlocked','1');
     input.value = '';
   };
@@ -59,3 +60,10 @@ if('IntersectionObserver' in window){
     }
   });
 })();
+
+/* Collapse the mobile menu after choosing a destination. */
+document.querySelectorAll('.mobile-menu').forEach(menu=>{
+ menu.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{menu.open=false;}));
+ menu.addEventListener('keydown',event=>{if(event.key==='Escape'){menu.open=false;menu.querySelector('summary').focus();}});
+});
+
