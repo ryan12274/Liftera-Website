@@ -434,3 +434,31 @@ footer.launch-footer,.clean-home footer.launch-footer{display:grid;grid-template
 /* Brand purpose: readable at every screen size. */
 .launch-footer .brand-tagline{max-width:32ch;line-height:1.75}
 .clean-home .mission-tagline{max-width:38ch;margin:24px 0 0;color:#b8c0ba;font-size:15px;line-height:1.8}
+
+/* Shared footer: brand, navigation and contact, with a quiet utility row. */
+footer.launch-footer,.clean-home footer.launch-footer{grid-template-columns:minmax(0,1.5fr) minmax(0,.8fr) minmax(0,1fr);column-gap:64px;row-gap:40px;padding:56px 32px 20px;color:#d6dcd8}
+.launch-footer>div{min-width:0}
+.launch-footer .footer-brand img,.clean-home .launch-footer .footer-brand img{display:block;width:120px}
+.launch-footer .brand-tagline{max-width:36ch;margin:20px 0 0;font-size:13px;line-height:1.85}
+.launch-footer .footer-label{margin:0 0 16px;color:#8e9a92;font-size:10px;letter-spacing:.16em}
+.launch-footer .footer-links{display:flex;flex-direction:column;gap:0;align-items:flex-start;font-size:13px}
+.launch-footer .footer-links a{padding:7px 0;min-height:36px}
+.launch-footer .footer-contact>a{display:inline-block;padding:7px 0;font-size:14px}
+.launch-footer .footer-contact>p:last-child{margin:12px 0 0;line-height:1.8}
+.launch-footer .footer-bottom{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:24px;border-top:1px solid #252b27;padding-top:16px}
+.launch-footer .footer-legal{display:flex;align-items:center;gap:24px;font-size:12px;color:#a8b0aa}
+.launch-footer .social-links{margin:0;gap:24px}
+.launch-footer .social-links a{border:0;border-radius:0;padding:10px 0;font-size:12px;gap:8px}
+.launch-footer a:hover{color:var(--cyan)}
+.launch-footer a:focus-visible{outline:2px solid var(--cyan);outline-offset:5px}
+@media(max-width:800px){
+ footer.launch-footer,.clean-home footer.launch-footer{grid-template-columns:1fr 1fr;column-gap:32px;padding:40px 24px 20px}
+ .launch-footer .footer-brand{grid-column:1/-1}
+ .launch-footer .brand-tagline{max-width:48ch}
+}
+@media(max-width:440px){
+ footer.launch-footer,.clean-home footer.launch-footer{column-gap:20px;row-gap:28px}
+ .launch-footer .footer-contact>a{font-size:12px}
+ .launch-footer .footer-bottom{align-items:flex-start;flex-direction:column;gap:6px}
+ .launch-footer .footer-legal{justify-content:space-between;width:100%}
+}
