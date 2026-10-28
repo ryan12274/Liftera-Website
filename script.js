@@ -67,11 +67,3 @@ document.querySelectorAll('.mobile-menu').forEach(menu=>{
  menu.addEventListener('keydown',event=>{if(event.key==='Escape'){menu.open=false;menu.querySelector('summary').focus();}});
 });
 
-/* Record campaign labels with the signup; no cookies or third-party tracker. */
-const campaignParams = new URLSearchParams(window.location.search);
-document.querySelectorAll('form[name="drop-chain-waitlist"]').forEach(form => {
-  for (const [field, parameter, fallback] of [['source','utm_source','direct'],['campaign','utm_campaign','']]) {
-    const input = form.elements.namedItem(field);
-    if (input) input.value = (campaignParams.get(parameter) || fallback).replace(/[^a-zA-Z0-9 _-]/g, '').slice(0, 80);
-  }
-});

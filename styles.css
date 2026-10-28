@@ -462,3 +462,24 @@ footer.launch-footer,.clean-home footer.launch-footer{grid-template-columns:minm
  .launch-footer .footer-bottom{align-items:flex-start;flex-direction:column;gap:6px}
  .launch-footer .footer-legal{justify-content:space-between;width:100%}
 }
+
+/* Brevo form: retain provider behavior inside the LIFTERA visual system. */
+.editorial-cta .sib-form{padding:0;margin:32px auto 0;background:transparent;font-family:Alata,Arial,sans-serif;text-align:left;max-width:530px}
+.editorial-cta #sib-container{padding:0;background:transparent;border:0;text-align:left;font-family:inherit}
+.editorial-cta .sib-form-block{padding:0;font-family:inherit;color:inherit}
+.editorial-cta .sib-text-form-block,.editorial-cta .sib-form-block>p{display:none}
+.editorial-cta #sib-form>div{padding:0}
+.editorial-cta #sib-form>div:has(.sib-text-form-block),.editorial-cta #sib-form>div:has(.sib-form-block>p){display:none}
+.editorial-cta .entry__label{color:#d6dcd8;font-size:13px;font-weight:400;margin-bottom:10px}
+.editorial-cta .entry__field{background:#171b18;border:1px solid #3b423d;border-radius:3px;margin:0;min-width:0}
+.editorial-cta #EMAIL{font-family:inherit;color:#fff;background:transparent;min-height:48px;padding:12px 14px;font-size:16px}
+.editorial-cta .entry__specification{display:none}
+.editorial-cta .sib-form-block__button{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--cyan);color:#111;font:400 13px Alata,Arial,sans-serif;border:0;border-radius:3px;min-height:48px;padding:14px 22px;margin-top:14px;cursor:pointer;width:100%}
+.editorial-cta .sib-form-block__button:hover{background:#75ded9}
+.editorial-cta .sib-form-block__button svg{width:18px;height:18px}
+.editorial-cta .sib-form-message-panel{font:400 14px/1.6 Alata,Arial,sans-serif;border-radius:3px;max-width:100%;margin:0 0 16px}
+.editorial-cta #error-message,.editorial-cta .entry__error{color:#661d1d;background:#ffeded;border-color:#ff4949}
+.editorial-cta #success-message{color:#085229;background:#e7faf0;border-color:#13ce66}
+.editorial-cta .sib-notification__icon{width:20px;height:20px}
+.editorial-cta .input--hidden{display:none!important}
+.editorial-cta #EMAIL:focus-visible,.editorial-cta button:focus-visible{outline:2px solid var(--cyan);outline-offset:4px}
