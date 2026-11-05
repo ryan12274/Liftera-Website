@@ -2,6 +2,18 @@
 
 Preview uses the liftera-waitlist-preview D1 database through WAITLIST_DB and an encrypted TURNSTILE_SECRET. Production requires its own database, schema migration, binding and Turnstile widget/secret before merging. Never use preview subscribers as the production list.
 
-Subscribers remain private in Cloudflare D1 Studio. Sign in to Cloudflare, open Storage & databases > D1 > liftera-waitlist-preview > Explore Data. Select waitlist to view records and export results as CSV. No public subscriber-list endpoint exists. Existing Brevo subscribers have not been migrated or deleted.
+Subscribers remain private in Cloudflare D1 Studio. Sign in to Cloudflare, open Storage & databases > D1 > liftera-waitlist-preview > Explore Data. Select waitlist to view records. For a CSV export, use the authenticated PowerShell command below. No export is available to website visitors. No public subscriber-list endpoint exists. Existing Brevo subscribers have not been migrated or deleted.
 
 Removal requests go to Liftera.mn@yahoo.com. Remove requested subscribers in D1 Studio before sending updates. A future email service must provide unsubscribe handling; this implementation only collects signups.
+
+## Private CSV export (PowerShell)
+Install the official Wrangler CLI if needed and sign in with `npx wrangler login`. Run this from a private directory outside the website checkout:
+
+```powershell
+$result = npx wrangler d1 execute d7a1e70e-5ffc-4dd9-b39d-40cb6bb67180 --remote --json --command "SELECT email, created_at, consent_version, source FROM waitlist ORDER BY created_at"
+if ($LASTEXITCODE -ne 0) { throw "Cloudflare export failed" }
+$parsed = ($result -join [Environment]::NewLine) | ConvertFrom-Json
+$parsed[0].results | Export-Csv -LiteralPath "$env:USERPROFILE/Downloads/liftera-preview-waitlist.csv" -NoTypeInformation -Encoding UTF8
+```
+
+This requires Cloudflare account access. Keep the resulting CSV private and do not commit it to the website repository.
