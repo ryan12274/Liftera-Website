@@ -475,3 +475,6 @@ footer.launch-footer,.clean-home footer.launch-footer{grid-template-columns:minm
 .waitlist-trap{position:absolute;left:-10000px}
 #waitlist-status{min-height:1.6em;font-size:14px;line-height:1.6}
 #waitlist-status[data-success=true]{color:var(--cyan)}
+
+.editorial-cta .waitlist-form{display:block;width:100%}
+.clean-home .waitlist-form input[type=checkbox]{appearance:auto;min-height:0;width:18px;height:18px;padding:0;flex:none;accent-color:var(--cyan)}
