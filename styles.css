@@ -478,3 +478,9 @@ footer.launch-footer,.clean-home footer.launch-footer{grid-template-columns:minm
 
 .editorial-cta .waitlist-form{display:block;width:100%}
 .clean-home .waitlist-form input[type=checkbox]{appearance:auto;min-height:0;width:18px;height:18px;padding:0;flex:none;accent-color:var(--cyan)}
+
+/* Real prototype photography, with the full product visible. */
+.prototype-photo{margin:0;min-width:0;align-self:center;border:1px solid #2b302c;border-radius:6px;overflow:hidden;background:#161917}
+.prototype-photo img{display:block;width:100%;height:auto}
+.prototype-photo figcaption{padding:18px 20px;color:#b8c0ba;font-size:13px;line-height:1.7}
+.prototype-photo figcaption strong{color:var(--cyan)}
