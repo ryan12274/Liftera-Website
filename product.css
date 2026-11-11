@@ -40,3 +40,16 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
 .drop-page .product-breadcrumb{max-width:1180px;margin:auto;padding-inline:32px}@media(max-width:700px){.drop-page .product-breadcrumb{padding-inline:24px}}
+
+/* Physical preorders remain closed until price, terms, shipping, and checkout are confirmed. */
+.drop-preorder{border-top:1px solid #303632;padding-top:20px}
+.drop-order-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.drop-order-heading h2,.drop-ve h2{font-size:21px;line-height:1.2}
+.drop-status{font-size:10px;color:var(--cyan);border:1px solid #37524a;padding:5px 8px;border-radius:3px}
+.drop-order-note{color:#b5bfb8;font-size:12px;line-height:1.75;margin:0}
+.drop-preorder .trade-price{margin-bottom:12px}
+.drop-preorder .drop-buy{margin-top:16px}
+.drop-ve{margin-top:22px;border-top:1px solid #303632;padding-top:20px;display:flex;gap:16px;align-items:center}
+.drop-ve p{font-size:11px;line-height:1.7;color:#b5bfb8;margin:8px 0 0}
+.drop-ve .button{flex-shrink:0;text-align:center;font-size:11px;min-height:44px;padding:12px}
+@media(max-width:480px){.drop-ve{align-items:stretch;flex-direction:column;gap:12px}.drop-ve .button{align-self:flex-start}}
