@@ -536,3 +536,21 @@ footer.launch-footer,.clean-home footer.launch-footer{grid-template-columns:minm
 .trade-hero .trade-photo figcaption{font-size:13px;padding:14px 16px}
 .trade-physical{margin-top:0}
 }
+
+/* Make physical launch interest the primary next step. */
+.trade-physical>.button{display:inline-flex;justify-content:center;margin-top:16px}
+.trade-physical .text-link{display:inline-block}
+.trade-purchase .button-secondary{background:transparent;color:#fff;border:1px solid #67746c}
+.trade-purchase .button-secondary:hover{border-color:var(--cyan);color:var(--cyan)}
+@media(max-width:800px){
+.clean-home .trade-hero{padding-block:28px;gap:18px}
+.trade-intro h1{font-size:52px}
+.trade-intro .trade-tagline{margin-bottom:14px}
+.trade-intro .eyebrow{margin-bottom:12px}
+.trade-intro .trade-description{font-size:14px;line-height:1.65}
+.trade-hero .trade-photo img{height:180px}
+.trade-hero .trade-photo figcaption{font-size:12px;padding:10px 12px;line-height:1.5}
+.trade-physical h2{font-size:22px}
+.trade-physical>.button{width:100%;margin-top:12px}
+.trade-physical p{font-size:12px;margin-top:10px}
+}

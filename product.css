@@ -62,3 +62,20 @@
 .drop-ve .button{margin-top:2px}
 .drop-quick-details>div{font-size:13px}
 @media(max-width:480px){.drop-order-heading{align-items:flex-start;flex-direction:column}}
+
+/* Optional detail stays available without lengthening the initial buying view. */
+.drop-page .drop-more{padding-bottom:48px}
+.drop-more>details{border-top:1px solid #3a423c}
+.drop-more>details:last-child{border-bottom:1px solid #3a423c}
+.drop-more>details>summary{cursor:pointer;padding:20px 8px;font-size:15px;color:#fff;list-style:revert;min-height:60px}
+.drop-more>details>summary:focus-visible{outline:2px solid var(--cyan);outline-offset:-2px}
+.drop-panel{padding:12px 8px 28px}
+.drop-demo-grid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:700px}
+.drop-demo-grid video{max-height:420px}
+.drop-spec-layout{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.drop-panel h2{font-size:24px;line-height:1.2;margin-bottom:20px}
+.drop-panel-note{font-size:13px;line-height:1.75;color:#b5bfb8;max-width:80ch;margin-top:20px}
+.drop-setup{padding-left:22px;margin:0;color:#c3cbc5;font-size:14px;line-height:1.8}
+.drop-setup li{padding:0 0 16px 6px}
+.drop-setup strong{color:#fff}
+@media(max-width:700px){.drop-spec-layout{grid-template-columns:1fr;gap:24px}.drop-demo-grid{grid-template-columns:1fr;max-width:340px}.drop-demo-grid video{max-height:400px}.drop-more>details>summary{font-size:14px}}
