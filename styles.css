@@ -513,3 +513,26 @@ footer.launch-footer,.clean-home footer.launch-footer{grid-template-columns:minm
 .trade-included{font-size:12px;line-height:1.7;color:#c3c7c4;margin:0 0 8px}
 .trade-photo{width:100%}.trade-photo img{object-fit:contain}
 @media(max-width:800px){.clean-home .trade-hero{grid-template-columns:1fr;gap:28px;padding-block:40px}.trade-copy h1{font-size:58px}.trade-photo{grid-row:2}.trade-description{max-width:100%}.trade-purchase .button{width:100%}.trade-tagline{font-size:19px}}
+
+/* Explain physical availability and VE eligibility before checkout. */
+.clean-home .trade-hero{grid-template-areas:"intro photo" "purchase photo";row-gap:0;align-items:start}
+.trade-intro{grid-area:intro;min-width:0}
+.trade-intro h1{font-size:clamp(52px,6vw,84px);line-height:1.06;margin:0 0 14px}
+.trade-hero .trade-copy{grid-area:purchase}
+.trade-hero .trade-photo{grid-area:photo;align-self:center}
+.trade-hero .trade-photo img{max-height:540px;object-fit:contain}
+.trade-physical{margin-top:10px}
+.trade-physical h2{font-size:24px;line-height:1.2}
+.trade-physical p{font-size:14px;color:#c3c7c4;line-height:1.75;margin:12px 0 4px}
+.trade-checkout-note,.trade-context{font-size:13px;line-height:1.75;color:#c3cbc5}
+.trade-context{margin:0 0 16px}
+.trade-context strong{color:#fff}
+.trade-checkout-note a{text-decoration:underline;text-underline-offset:3px}
+@media(max-width:800px){
+.clean-home .trade-hero{grid-template-areas:"intro" "photo" "purchase";gap:24px}
+.trade-intro h1{font-size:58px}
+.trade-intro .trade-description{margin-bottom:0}
+.trade-hero .trade-photo img{height:260px;max-height:none;object-fit:contain}
+.trade-hero .trade-photo figcaption{font-size:13px;padding:14px 16px}
+.trade-physical{margin-top:0}
+}

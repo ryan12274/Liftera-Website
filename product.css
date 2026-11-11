@@ -53,3 +53,12 @@
 .drop-ve p{font-size:11px;line-height:1.7;color:#b5bfb8;margin:8px 0 0}
 .drop-ve .button{flex-shrink:0;text-align:center;font-size:11px;min-height:44px;padding:12px}
 @media(max-width:480px){.drop-ve{align-items:stretch;flex-direction:column;gap:12px}.drop-ve .button{align-self:flex-start}}
+
+/* Purchase eligibility and order details need readable text. */
+.drop-preorder .trade-checkout-note,.drop-order-note,.drop-ve p,.drop-status,.drop-main-photo figcaption{font-size:13px;line-height:1.75}
+.drop-ve{align-items:flex-start}
+.drop-ve p strong{color:#fff}
+.drop-ve p a{color:var(--cyan);text-decoration:underline;text-underline-offset:3px}
+.drop-ve .button{margin-top:2px}
+.drop-quick-details>div{font-size:13px}
+@media(max-width:480px){.drop-order-heading{align-items:flex-start;flex-direction:column}}
