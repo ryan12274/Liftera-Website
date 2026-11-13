@@ -1,6 +1,6 @@
 const API_VERSION = '2026-10-28.endive';
 const COOKIE = 'liftera_checkout_test';
-const MARKER = 'liftera-preview-v1';
+const MARKER = 'liftera-preview-v2';
 const headers = {'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff'};
 const reply = (status, body, extra = {}) => Response.json(body, {status, headers: {...headers, ...extra}});
 const previewHost = hostname => /^(preview|[a-f0-9]{8})\.lifterashop\.pages\.dev$/.test(hostname);
@@ -68,6 +68,8 @@ export async function onRequest({request, env}) {
   const body = new URLSearchParams({
    'ui_mode':'embedded_page',
    'mode':'payment',
+   'branding_settings[background_color]':'#101010',
+   'branding_settings[button_color]':'#48D1CC',
    'allowed_payment_method_types[0]':'card',
    'line_items[0][price_data][currency]':'usd',
    'line_items[0][price_data][unit_amount]':'3500',

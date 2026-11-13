@@ -25,3 +25,7 @@ Use Stripe's official test cards and fictitious customer details. Check a succes
 
 ## Before real preorders
 This test-only integration does not fulfill orders. Confirm price, estimated shipping date, shipping rates, taxes, cancellation/refund terms, final product details, and an order/fulfillment workflow. Add signed webhooks and persistent order records before enabling real orders. Review privacy text for customer/order information. Live mode requires a separate reviewed change; replacing keys alone cannot enable it.
+
+## Checkout branding and draft terms
+The embedded session requests background #101010 and primary buttons #48D1CC. Branding settings are per session. The integration marker v2 causes prior test sessions to be replaced when starting a newly branded checkout.
+preorder-policy.html contains proposed terms for review only. It is noindex, linked from the preview product page, and does not collect acceptance. Real payment timing, shipping, refund-processing procedures and returns remain to be approved. Draft source: https://www.ftc.gov/legal-library/browse/rules/mail-internet-or-telephone-order-merchandise-rule

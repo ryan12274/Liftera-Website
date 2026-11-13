@@ -91,3 +91,5 @@
 .checkout-test-banner>p:last-child{max-width:76ch;color:#c3cbc5;font-size:14px;line-height:1.8}
 #checkout-status{font-size:14px;line-height:1.8;color:#d7dfd9}
 #stripe-checkout{width:100%;background:#fff;border-radius:6px}
+
+.draft-policy-link{color:var(--cyan);text-decoration:underline;text-underline-offset:4px;font-size:13px}
