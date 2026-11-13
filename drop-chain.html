@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <link rel="icon" href="lifteralogo.svg?v=5">
 <link rel="stylesheet" href="styles.css?v=demand-20261111">
-<link rel="stylesheet" href="product.css?v=demand-20261111">
+<link rel="stylesheet" href="product.css?v=stripe-preview-20261113">
 </head>
 <body class="clean-home drop-page">
 <a class="skip-link" href="#main-content">Skip to content</a>
@@ -46,6 +46,7 @@
 <p class="drop-order-note">Price is tentative. U.S. delivery is planned; shipping costs and the estimated shipping date are still being finalized.</p>
 <a class="button button-primary drop-buy" href="index.html#waitlist">Notify me when preorders open</a>
 <p class="trade-checkout-note">Free launch updates. No payment or product reservation.</p>
+<div class="checkout-test-invite"><p><strong>Preview only:</strong> try the $35 U.S. preorder checkout using Stripe test mode.</p><button id="start-checkout" class="button button-secondary" type="button" aria-controls="stripe-preview">Try embedded test checkout</button></div>
 </div>
 <div class="drop-ve" aria-labelledby="ve-title">
 <div><h2 id="ve-title">Shopping with VE?</h2><p>$34.99 through the Virtual Enterprises educational marketplace. <strong>No physical product will be shipped.</strong> Complete the transaction in VE checkout. <a href="mailto:Liftera.mn@yahoo.com?subject=VE%20order%20question">Order questions? Email us.</a></p></div>
@@ -55,6 +56,7 @@
 
 </div>
 </section>
+<section id="stripe-preview" class="stripe-preview" hidden aria-labelledby="stripe-preview-title"><div class="checkout-test-banner"><p class="eyebrow">STRIPE / TEST MODE</p><h2 id="stripe-preview-title">Preview your checkout.</h2><p>This is a test of a $35 USD Drop Chain preorder, with a U.S. shipping address. No real payments or product reservations. Shipping and taxes are not finalized. Use test details only.</p></div><p id="checkout-status" role="status" aria-live="polite"></p><div id="stripe-checkout"></div><noscript>Enable JavaScript to preview Stripe checkout.</noscript></section>
 <section class="drop-more" aria-label="Product demonstrations and specifications">
 <details><summary>Watch the prototype: dips &amp; pull-ups</summary>
 <div class="drop-panel"><div class="prototype-media-grid drop-demo-grid"><figure><video controls playsinline preload="none" width="540" height="960" poster="media/prototype-pull-ups.jpg" aria-label="Drop Chain prototype during pull-ups" aria-describedby="pull-ups-caption"><source src="media/prototype-pull-ups.mp4" type="video/mp4">Your browser does not support embedded video. <a href="media/prototype-pull-ups.mp4">Watch the pull-up clip</a>.</video><figcaption id="pull-ups-caption"><h3>Pull-ups</h3><p>A short development clip showing the prototype attached to a lifting belt during pull-ups. Silent video.</p></figcaption></figure>
@@ -75,5 +77,6 @@
 </footer>
 <script src="script.js"></script>
 <script src="product.js" defer></script>
+<script src="checkout.js?v=20261113" defer></script>
 </body>
 </html>

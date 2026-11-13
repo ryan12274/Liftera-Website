@@ -79,3 +79,15 @@
 .drop-setup li{padding:0 0 16px 6px}
 .drop-setup strong{color:#fff}
 @media(max-width:700px){.drop-spec-layout{grid-template-columns:1fr;gap:24px}.drop-demo-grid{grid-template-columns:1fr;max-width:340px}.drop-demo-grid video{max-height:400px}.drop-more>details>summary{font-size:14px}}
+
+.checkout-test-invite{margin-top:20px;padding-top:16px;border-top:1px solid #303632}
+.checkout-test-invite p{font-size:13px;color:#b5bfb8;line-height:1.75}
+.checkout-test-invite button{color:#fff;background:transparent;cursor:pointer;font-family:inherit}
+.checkout-test-invite button:disabled{opacity:.65;cursor:wait}
+.stripe-preview[hidden]{display:none}
+.drop-page .stripe-preview{scroll-margin-top:100px;padding-bottom:48px}
+.checkout-test-banner{border-left:2px solid var(--cyan);padding:20px 24px;background:#161c18;margin-bottom:24px}
+.checkout-test-banner h2{font-size:32px;line-height:1.15}
+.checkout-test-banner>p:last-child{max-width:76ch;color:#c3cbc5;font-size:14px;line-height:1.8}
+#checkout-status{font-size:14px;line-height:1.8;color:#d7dfd9}
+#stripe-checkout{width:100%;background:#fff;border-radius:6px}
