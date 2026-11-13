@@ -38,6 +38,8 @@ test('server owns the price, US destination, test mode, and session ownership',a
   assert.equal(params.get('line_items[0][quantity]'),'1');
   assert.equal(params.get('shipping_address_collection[allowed_countries][0]'),'US');
   assert.equal(params.get('ui_mode'),'embedded_page');
+  assert.equal(params.get('allowed_payment_method_types[0]'),'card');
+  assert.equal(params.has('payment_method_types[0]'),false);
   assert.equal(calls[0].options.headers['Stripe-Version'],'2026-10-28.endive');
   assert.match(params.get('return_url'),/^https:\/\/preview\.lifterashop\.pages\.dev\/checkout-return/);
   const cookie=response.headers.get('Set-Cookie');

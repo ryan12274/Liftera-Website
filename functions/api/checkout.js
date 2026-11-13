@@ -68,10 +68,10 @@ export async function onRequest({request, env}) {
   const body = new URLSearchParams({
    'ui_mode':'embedded_page',
    'mode':'payment',
-   'payment_method_types[0]':'card',
+   'allowed_payment_method_types[0]':'card',
    'line_items[0][price_data][currency]':'usd',
    'line_items[0][price_data][unit_amount]':'3500',
-   'line_items[0][price_data][product_data][name]':'Drop Chain preorder — TEST ONLY',
+   'line_items[0][price_data][product_data][name]':'Drop Chain preorder (TEST ONLY)',
    'line_items[0][price_data][product_data][description]':'Preview demonstration only. No real order or product reservation. Final price and shipping details are not confirmed.',
    'line_items[0][quantity]':'1',
    'shipping_address_collection[allowed_countries][0]':'US',
