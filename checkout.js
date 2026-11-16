@@ -19,6 +19,7 @@
  let phase = 'idle';
  let productScroll = 0;
  let ownsHistoryEntry = false;
+ const originalScrollRestoration = history.scrollRestoration;
 
  const setState = (next, title = '', message = '', actionText = '') => {
   phase = next;
@@ -120,6 +121,7 @@
  const showCheckout = () => {
   if (!section.hidden) return;
   productScroll = window.scrollY;
+  history.scrollRestoration = 'manual';
   document.body.classList.add('checkout-open');
   section.hidden = false;
   button.setAttribute('aria-expanded', 'true');
@@ -137,6 +139,7 @@
   button.focus({preventScroll:true});
   window.scrollTo({top:productScroll, behavior:'instant'});
   ownsHistoryEntry = false;
+  history.scrollRestoration = originalScrollRestoration;
  };
  const goBack = () => {
   if (ownsHistoryEntry) history.back();
@@ -162,6 +165,9 @@
  window.addEventListener('hashchange', () => {
   if (location.hash === '#checkout') showCheckout();
   else showProduct();
+ });
+ window.addEventListener('pageshow', () => {
+  if (!section.hidden) window.scrollTo({top:0, behavior:'instant'});
  });
  if (location.hash === '#checkout') showCheckout();
 })();
