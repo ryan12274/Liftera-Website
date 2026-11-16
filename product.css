@@ -135,3 +135,27 @@
 
 /* Stripe changes height as it loads; keep browser scroll anchoring from moving the checkout heading. */
 body.checkout-open{overflow-anchor:none}
+
+/* Confirmed preorder details and a short review before Stripe. */
+#start-checkout{font-family:inherit;cursor:pointer;border:0}
+#start-checkout[hidden],#preorder-review[hidden],.checkout-test-help[hidden]{display:none}
+.preorder-highlights{margin:18px 0;font-size:13px;line-height:1.7}
+.preorder-highlights>div{display:grid;grid-template-columns:95px 1fr;gap:12px;padding:8px 0}
+.preorder-highlights dt{color:#aeb7b1}
+.preorder-highlights dd{margin:0;color:#e1e7e3}
+.draft-policy-link{color:var(--cyan);text-decoration:underline;text-underline-offset:4px}
+.preorder-review{max-width:700px;margin:auto;padding:40px}
+.preorder-review h3{font-size:32px;line-height:1.15;margin:0 0 26px}
+.preorder-review-lines{margin:0 0 24px}
+.preorder-review-lines>div{display:flex;justify-content:space-between;gap:24px;padding:16px 0;border-top:1px solid #303632;font-size:14px}
+.preorder-review-lines dt{color:#aeb7b1}
+.preorder-review-lines dd{margin:0;text-align:right;max-width:30ch}
+.preorder-review-lines dd span{display:block;font-size:12px;color:#aeb7b1;margin-top:4px}
+.preorder-review>p{font-size:14px;line-height:1.8;color:#b5bfb8}
+.preorder-review a{color:var(--cyan);text-decoration:underline;text-underline-offset:4px}
+.preorder-agreement{display:flex;align-items:flex-start;gap:12px;padding-top:20px;margin-top:24px;border-top:1px solid #303632;font-size:13px;line-height:1.8;color:#d7dfd9;cursor:pointer}
+.preorder-agreement input{width:18px;height:18px;flex:none;margin:4px 0 0;accent-color:var(--cyan)}
+#preorder-continue{font-family:inherit;cursor:pointer;width:100%;min-height:50px;border:0;margin-top:24px}
+#preorder-continue:disabled{opacity:.45;cursor:not-allowed}
+.preorder-review .preorder-review-note{font-size:12px;margin-bottom:0}
+@media(max-width:600px){.preorder-review{padding:28px 20px}.preorder-review h3{font-size:28px}.preorder-review-lines>div{font-size:13px;gap:16px}.preorder-review-lines dd{max-width:24ch}.preorder-highlights>div{grid-template-columns:90px 1fr}}

@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <link rel="icon" href="lifteralogo.svg?v=5">
 <link rel="stylesheet" href="styles.css?v=demand-20261111">
-<link rel="stylesheet" href="product.css?v=checkout-polish-20261116b">
+<link rel="stylesheet" href="product.css?v=preorders-20261116">
 </head>
 <body class="clean-home drop-page">
 <a class="skip-link" href="#main-content">Skip to content</a>
@@ -41,16 +41,15 @@
 <p class="trade-tagline">Add weight. Keep your belt.</p>
 <p class="drop-description">An attachment for weighted dips and pull-ups using the lifting belt you already own.</p>
 <div class="drop-preorder" aria-labelledby="preorder-title">
-<div class="drop-order-heading"><h2 id="preorder-title">Physical product</h2><span class="drop-status">Preorders not open yet</span></div>
-<p class="trade-price">$35 <span>USD · planned price</span></p>
-<p class="drop-order-note">Price is tentative. U.S. delivery is planned; shipping costs and the estimated shipping date are still being finalized.</p>
-<a class="button button-primary drop-buy" href="index.html#waitlist">Notify me when preorders open</a>
+<div class="drop-order-heading"><h2 id="preorder-title">Physical product</h2><span class="drop-status" id="preorder-availability">Preorders opening soon</span></div>
+<p class="trade-price">$35 <span>USD + shipping</span></p>
+<p class="drop-order-note"><strong>Estimated to ship mid-December 2026.</strong> Delivery to the lower 48 U.S. states and Washington, D.C. Shipping is paid by the customer; the charge will be published before preorders open.</p>
+<dl class="preorder-highlights"><div><dt>Payment</dt><dd>Full payment at preorder.</dd></div><div><dt>Cancellation</dt><dd>Full refund before shipment.</dd></div><div><dt>Returns</dt><dd>30 days for unused items. Customer pays return shipping.</dd></div></dl>
+<p class="drop-order-note"><a class="draft-policy-link" href="preorder-policy.html">Read the preorder &amp; return terms ↗</a></p>
+<button id="start-checkout" class="button button-primary drop-buy" type="button" aria-controls="stripe-preview" aria-expanded="false" hidden>Preview preorder checkout →</button>
+<a class="button button-secondary drop-buy" id="preorder-updates" href="index.html#waitlist">Notify me when preorders open</a>
 <p class="trade-checkout-note">Free launch updates. No payment or product reservation.</p>
-<div class="checkout-test-invite">
-<div class="checkout-invite-heading"><span class="checkout-test-pill">TEST MODE</span><p>Take a look at checkout before launch.</p></div>
-<button id="start-checkout" class="button button-secondary" type="button" aria-controls="stripe-preview" aria-expanded="false">Preview checkout <span aria-hidden="true">→</span></button>
-<p class="checkout-invite-note">A $35 test only. No charge or product reservation.</p>
-</div>
+<p class="checkout-invite-note" id="preorder-mode-note">Real preorders are not open yet.</p>
 </div>
 <div class="drop-ve" aria-labelledby="ve-title">
 <div><h2 id="ve-title">Shopping with VE?</h2><p>$34.99 through the Virtual Enterprises educational marketplace. <strong>No physical product will be shipped.</strong> Complete the transaction in VE checkout. <a href="mailto:Liftera.mn@yahoo.com?subject=VE%20order%20question">Order questions? Email us.</a></p></div>
@@ -62,8 +61,17 @@
 </section>
 <section id="stripe-preview" class="stripe-preview" hidden aria-labelledby="stripe-preview-title" data-state="idle">
 <div class="checkout-heading"><div><p class="eyebrow">LIFTERA / DROP CHAIN</p><h2 id="stripe-preview-title" tabindex="-1">Checkout</h2></div><div class="checkout-heading-meta"><span class="checkout-test-pill">TEST MODE</span><p class="checkout-security"><svg width="16" height="18" viewBox="0 0 16 18" fill="none" aria-hidden="true"><path d="M4 8V5a4 4 0 0 1 8 0v3M3 8h10v9H3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>Payment handled by Stripe</p></div></div>
-<p class="checkout-preview-note">Preview only. No real payment or reservation. Shipping date, shipping costs, and taxes are not finalized.</p>
+<p class="checkout-preview-note" id="preorder-checkout-note">Preview only. No real payment or reservation. Real shipping charges and taxes are not finalized.</p>
 <div class="checkout-stage">
+<div id="preorder-review" class="preorder-review" hidden>
+<p class="eyebrow">BEFORE YOU CONTINUE</p><h3>Your preorder, at a glance.</h3>
+<dl class="preorder-review-lines"><div><dt>Drop Chain</dt><dd>$35.00 USD <span>1 attachment</span></dd></div><div><dt>Shipping</dt><dd id="preorder-shipping-line">Charge not finalized</dd></div><div><dt>Estimated shipment</dt><dd>Mid-December 2026</dd></div><div><dt>Delivery area</dt><dd>Lower 48 U.S. states &amp; Washington, D.C.</dd></div></dl>
+<p>Full payment at checkout. Cancel before the order is handed to the carrier for a full refund, including any shipping and taxes paid.</p>
+<p><a href="preorder-policy.html" target="_blank" rel="noopener">Preorder, cancellation &amp; return terms ↗<span class="sr-only"> (opens in a new tab)</span></a></p>
+<label class="preorder-agreement"><input id="preorder-agreement" type="checkbox"><span id="preorder-agreement-text">I have reviewed the preorder terms. This is a test only and does not create an order or agreement.</span></label>
+<button id="preorder-continue" class="button button-primary" type="button" disabled>Continue to test payment →</button>
+<p class="preorder-review-note" id="preorder-review-note">Shipping and taxes in this test do not represent a final quote.</p>
+</div>
 <div id="checkout-state" class="checkout-state">
 <span id="checkout-state-icon" class="checkout-state-icon" aria-hidden="true"></span>
 <h3 id="checkout-state-title">Loading checkout</h3>
@@ -96,6 +104,6 @@
 </footer>
 <script src="script.js"></script>
 <script src="product.js" defer></script>
-<script src="checkout.js?v=polish-20261116b" defer></script>
+<script src="checkout.js?v=preorders-20261116" defer></script>
 </body>
 </html>

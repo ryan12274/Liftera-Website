@@ -1,13 +1,66 @@
 # Physical preorder launch
-Preview preparation only. Real checkout is not enabled.
-## Confirm before enabling payments
-- Final USD price (currently a tentative $35).
-- Estimated shipping date, shipping charges, and supported U.S. destinations.
-- Cancellation and refund terms approved by LIFTERA.
-- Product version, included items, belt compatibility, and usage/load guidance.
-## Stripe connection
-Create a hosted Stripe checkout/payment link for the physical Drop Chain preorder after those details are confirmed. Clearly label it as a preorder, state when payment is collected and the estimated shipping date, collect customer email and shipping address, and restrict delivery to supported U.S. destinations.
-Configure shipping charges and applicable taxes in Stripe, customer receipts, and seller notifications. Provide the approved shipping/cancellation/refund terms before checkout.
-Use Stripe test mode to check successful/failed payments, shipping totals and addresses, receipts, and refunds before connecting a live link. Do not treat a browser return page as proof of payment.
-Replace the launch-updates link in .drop-preorder with the verified Stripe link only when ready. Update the status, price and shipping copy at the same time. Keep the VE link and price separate.
-The Cloudflare waitlist remains an update list, not an order database. Manage paid orders and fulfillment using the selected Stripe workflow. No card information or secret API keys belong in this static site.
+Prepared on preview. Production and real payments remain closed.
+
+## Confirmed November 16
+- $35 USD for one Drop Chain attachment. No belt or plates.
+- Lower 48 U.S. states plus Washington, D.C. No Alaska, Hawaii, territories or military addresses.
+- Estimated shipment: mid-December 2026. This is not a guaranteed delivery date.
+- Full payment at checkout. Cancel before handing the order to the carrier for a full refund, including shipping and tax.
+- Unused returns requested within 30 days of delivery; buyer pays return shipping.
+- Review the published policy's details for original outbound shipping and defective/incorrect goods before enabling live sales.
+
+## Still required before opening
+1. Pack and weigh a sample; obtain actual dimensions and origin ZIP. Current weight estimate is 3–5 lb, packaging unconfirmed. Pick a shipping service and confirm the customer charge. PREORDER_SHIPPING_CENTS must be explicitly set; no default free shipping in live mode.
+2. Configure Stripe live account/business details, payouts, sales-tax treatment, support details, and automatic successful-payment/refund receipts. Live checkout requests Stripe automatic tax; configure actual registrations and product tax treatment in Stripe. Do not enable tax collection for registrations you do not hold.
+3. Create separate preview and production order databases. Bind each as ORDERS_DB. Apply migrations/0002_preorders.sql to each. No order emails/addresses are copied into D1; Stripe keeps fulfillment details.
+4. Register the test and live webhook destinations below, using separate matching STRIPE_WEBHOOK_SECRET secrets. Add secret keys directly to Cloudflare, never to chat or GitHub.
+5. Verify paid and declined cards, 3DS, lower-48 acceptance, AK/HI/territory/military rejection, correct shipping/tax totals, replayed webhook, storage failure/retry, receipt, and a full refund. A test payment must create exactly one order even if the customer closes the browser.
+6. Confirm manufacturing capacity, final included hardware, usage/load guidance, packaging, and the process/person responsible for fulfillment and customer support.
+7. Review final preorder and return terms, including no refund of original outbound shipping for change-of-mind returns and LIFTERA covering necessary return shipping for confirmed defective/damaged/incorrect goods.
+
+## Payment architecture
+The new endpoint is POST /api/preorder. The old /api/checkout endpoint remains a test-only legacy demonstration and cannot accept live payments.
+- Preview hostnames always require matching test keys; production liftera.shop/www.liftera.shop always require matching live keys.
+- Create requires the current policy acknowledgement; price, quantity, shipping amount, and terms metadata are server-owned.
+- Signed HttpOnly, Secure, SameSite=Lax session cookies expire within 24h and are host-bound.
+- Full embedded Stripe page; server-only shipping changes validate the state and address before Stripe accepts shipping details.
+- The shipping callback is a deprecated Stripe embedded-page capability. Its availability MUST be verified in the actual sandbox and live account before approval. If unavailable, migrate to the supported Checkout form flow; never remove the lower-48 restriction just to make payment work.
+- Stripe is the source of truth. Status checks and signed webhooks retrieve the latest session and expanded line items/payment. D1 records only paid + complete orders.
+- Records are idempotent by session; duplicate delivery cannot reset a shipped order or erase refunds. Unexpected shipping/total/line-item cases become needs_review.
+- Full refunds and dispute flags are tracked. No automatic shipment or refund is performed.
+- No confirmation is based solely on a browser URL. An uncertain result tells the buyer to verify/contact support before trying to pay again.
+- Checkout uses stable idempotency parameters; retries after a lost response do not create a second payment.
+
+## Webhook destinations
+Preview: https://preview.lifterashop.pages.dev/api/stripe-webhook
+Production: https://liftera.shop/api/stripe-webhook
+Use snapshot events with API version 2026-10-28.endive:
+checkout.session.completed
+checkout.session.async_payment_succeeded
+charge.refunded
+charge.dispute.created
+charge.dispute.closed
+The handler re-fetches current Stripe objects, verifies raw-body HMAC with a five-minute timestamp tolerance, and returns 503 if recording fails so Stripe retries. The webhook remains active when the sales switch is off.
+
+## Enabling live payments is a separate reviewed release
+TERMS.readyForLive remains false in functions/api/preorder.js.
+PREORDERS_OPEN must also be the exact string true in Production. Both are required, along with matching live keys, shipping charge, database and webhook secret. The shipping estimate is invalidated after December 20, 2026; update the estimate and review terms before selling beyond that window.
+Set readiness only AFTER the checks above pass and the owner asks to publish. Update the policy's closed-sales banner at the same time. Keep preview in test mode. A key replacement alone cannot open sales.
+To pause new orders, set PREORDERS_OPEN=false and redeploy production. Existing sessions need to be expired in Stripe as well; stopping creation does not revoke already-open Stripe sessions. Status and webhooks must continue working for existing orders.
+
+## Daily operations
+Assign someone to review Stripe successful payments and failed webhook deliveries every day while preorders are open. Turn on seller payment notifications in Stripe.
+D1 is a reconciliation ledger, not a packing/shipping system. Use Stripe's collected email and shipping details for each verified paid order, and track shipment/carrier/tracking in the team's private fulfillment workflow.
+Never ship rows with amount_refunded>0, disputed=1, fulfillment_status=needs_review or canceled without resolving them first.
+For cancellation: locate the Stripe payment by order_ref, confirm unshipped, issue a full refund through Stripe, confirm it to the customer, and mark fulfillment canceled. The site has no public refund endpoint.
+Before the promised shipping window ends, ship or contact each affected buyer about any delay, obtain affirmative agreement to wait, or cancel/refund according to the policy. Keep the communications.
+Test receipts do not send automatically; verify the live receipt setting separately.
+
+## Production merge caution
+Main has later mobile-performance and favicon work that preview does not fully contain. Preserve main's optimized images, fonts, lazy Turnstile, robots.txt and favicons when preparing the final launch merge. Do not overwrite main with the entire preview tree.
+
+References:
+https://docs.stripe.com/checkout/fulfillment?ui=full-page
+https://docs.stripe.com/receipts
+https://docs.stripe.com/events/manage-webhook-endpoints
+https://www.ftc.gov/business-guidance/resources/business-guide-ftcs-mail-internet-or-telephone-order-merchandise-rule

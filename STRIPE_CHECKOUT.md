@@ -1,34 +1,7 @@
-# Stripe embedded checkout: preview only
-
-The product page has an on-demand embedded Stripe test checkout for one Drop Chain at USD 35.00. It collects a U.S. shipping address. Shipping fees and tax are deliberately not modeled yet; the UI and Stripe submit text identify this as a demonstration with no real purchase or reservation.
-
-## Connect the account
-In Cloudflare Pages project lifterashop, Settings > Variables and Secrets, select Preview:
-- STRIPE_SECRET_KEY: the account's Stripe test secret key, encrypted.
-- STRIPE_PUBLISHABLE_KEY: the matching test publishable key.
-
-Use keys from the same Stripe sandbox/account. Save them in Cloudflare, not the repository or chat. Redeploy preview after changing variables. No live keys are accepted by the endpoint.
-
-The allowed hosts are preview.lifterashop.pages.dev and the project's eight-character hexadecimal deployment URLs. Production hosts are rejected. No production environment settings need to change.
-
-## Implementation
-- POST /api/checkout creates server-priced embedded_page sessions using Stripe API 2026-10-28.endive.
-- checkout.js loads Stripe.js endive directly from js.stripe.com only when the visitor asks to test checkout, then mounts createEmbeddedCheckoutPage.
-- A signed, host-bound, one-hour HttpOnly cookie identifies the visitor's test session.
-- The completion callback and checkout-return page verify paid + complete with Stripe. The API returns no customer details.
-- All responses are no-store. Request origins, payload sizes, test keys, and session ownership are checked.
-- Session creation uses an idempotency key; open sessions resume using the signed cookie.
-- The existing waitlist and VE checkout are separate.
-
-## Validate after configuration
-Use Stripe's official test cards and fictitious customer details. Check a successful card, a declined card, and a 3DS challenge; inspect the corresponding test payments in Stripe. Verify return/cancellation status and mobile layout. Never enter real payment information into a test checkout.
-
-## Before real preorders
-This test-only integration does not fulfill orders. Confirm price, estimated shipping date, shipping rates, taxes, cancellation/refund terms, final product details, and an order/fulfillment workflow. Add signed webhooks and persistent order records before enabling real orders. Review privacy text for customer/order information. Live mode requires a separate reviewed change; replacing keys alone cannot enable it.
-
-## Checkout branding and draft terms
-The embedded session requests background #101010 and primary buttons #48D1CC. Branding settings are per session. The integration marker v3 causes prior test sessions to be replaced when starting a newly branded checkout with the prototype product photo.
-preorder-policy.html contains proposed terms for review only. It is noindex, linked from the preview product page, and does not collect acceptance. Real payment timing, shipping, refund-processing procedures and returns remain to be approved. Draft source: https://www.ftc.gov/legal-library/browse/rules/mail-internet-or-telephone-order-merchandise-rule
-
-## Focused checkout view
-The preview entry opens #checkout on the product page. The product content and full footer are hidden while checkout is open. Back to product and browser back restore the product view; returning to checkout keeps the mounted Stripe form intact. Loading and connection errors offer retry, payment verification errors offer a status check, and confirmed test completion offers a fresh test or launch updates. Policy/privacy links open in a new tab so they do not interrupt form entry. The optional test-payment help uses only Stripe's official test card.
+# Stripe preorder integration
+See PREORDERS.md for confirmed terms, setup, test cases, and launch controls.
+The preview storefront now uses /api/preorder and /api/stripe-webhook. The legacy /api/checkout endpoint is still test-only.
+No real payments are enabled. TERMS.readyForLive=false is intentional.
+Preview variables: matching STRIPE_SECRET_KEY (encrypted sk_test), STRIPE_PUBLISHABLE_KEY (pk_test), STRIPE_WEBHOOK_SECRET (encrypted whsec), ORDERS_DB binding, and an explicit PREORDER_SHIPPING_CENTS once approved.
+Use separate live keys, webhook and database in Production only during the reviewed launch release.
+Never put secret values in source control, logs, screenshots, or chat.
