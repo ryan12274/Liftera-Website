@@ -189,6 +189,7 @@
      if (result.type === 'error') {confirmationAttempted = false; throw new Error(result.error.message);}
      await verify();
     } catch (error) {
+     if (config.testMode) console.warn('Preview checkout confirmation:', String(error.message || error).replace(/(?:cs_(?:test|live)_[A-Za-z0-9]+_secret_|whsec_|sk_(?:test|live)_)[A-Za-z0-9]+/g,'[redacted]'));
      if (confirmationAttempted) setState('verify-error','We could not confirm the result','Please check the payment status before attempting another payment.','Check payment status');
      else {formError.textContent = error.message || 'Check your details and try again.'; formError.focus({preventScroll:true});}
     } finally {submitting = false; pay.disabled = false;}

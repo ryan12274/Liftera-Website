@@ -28,13 +28,14 @@
  const security=()=>{
   if(securityPromise)return securityPromise;
   securityPromise=new Promise((resolve,reject)=>{
+   const timeout=setTimeout(()=>{securityPromise=null;reject(Error('The security check took too long. Please try opening the form again.'));},20000);
    const ready=()=>{
-    if(widget===undefined)widget=window.turnstile.render('#review-turnstile',{sitekey:'0x4AAAAAAF1OpIwAiZ1GFxTO',action:'review',theme:'dark',size:'flexible'});
-    resolve();
+    try {if(widget===undefined)widget=window.turnstile.render('#review-turnstile',{sitekey:'0x4AAAAAAF1OpIwAiZ1GFxTO',action:'review',theme:'dark',size:'flexible'});clearTimeout(timeout);resolve();}
+    catch(error){clearTimeout(timeout);securityPromise=null;reject(Error('The security check could not start. Please reload and try again.'));}
    };
    if(window.turnstile){ready();return;}
    const script=document.createElement('script');script.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';script.async=true;
-   script.onload=()=>window.turnstile.ready(ready);script.onerror=()=>{script.remove();securityPromise=null;reject(Error('The security check could not load. Please try again.'));};document.head.append(script);
+   script.onload=ready;script.onerror=()=>{clearTimeout(timeout);script.remove();securityPromise=null;reject(Error('The security check could not load. Please try again.'));};document.head.append(script);
   });return securityPromise;
  };
  document.getElementById('review-write').addEventListener('toggle',event=>{if(event.target.open)security().catch(error=>status.textContent=error.message);});
