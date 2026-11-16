@@ -155,13 +155,23 @@
    const stripe = window.Stripe(data.publishableKey);
    const sdk = stripe.initCheckoutElementsSdk({
     clientSecret:data.clientSecret,
-    elementsOptions:{appearance:{theme:'stripe',variables:{colorPrimary:'#48D1CC',fontFamily:'Arial, sans-serif',borderRadius:'4px'}},savedPaymentMethod:{enableSave:'never',enableRedisplay:'never'}}
+    elementsOptions:{appearance:{theme:'stripe',variables:{colorPrimary:'#48D1CC',fontFamily:'Arial, sans-serif',borderRadius:'4px'}},savedPaymentMethod:{enableSave:'never',enableRedisplay:'never'},syncAddressCheckbox:'none'}
    });
    const loaded = await sdk.loadActions();
    if (loaded.type !== 'success') throw new Error('Stripe could not prepare checkout. Please try again.');
    const actions = loaded.actions;
    const shipping = sdk.createShippingAddressElement({autocomplete:{mode:'disabled'}});
-   const payment = sdk.createPaymentElement({layout:'tabs'});
+   const payment = sdk.createPaymentElement({layout:'tabs',fields:{billingDetails:'never'},wallets:{applePay:'never',googlePay:'never',link:'never'}});
+   const sameBilling = document.getElementById('preorder-billing-same');
+   const billingFields = document.getElementById('preorder-billing-fields');
+   let billing;
+   let billingMounted = false;
+   sameBilling.checked = true; billingFields.hidden = true;
+   sameBilling.onchange = () => {
+    billingFields.hidden = sameBilling.checked;
+    if (sameBilling.checked) {if (billingMounted) {billing.unmount(); billingMounted = false;}}
+    else {if (!billing) billing = sdk.createBillingAddressElement({autocomplete:{mode:'disabled'}}); billing.mount('#stripe-billing'); billingMounted = true;}
+   };
    const form = document.getElementById('preorder-payment-form');
    const pay = document.getElementById('preorder-pay');
    const formError = document.getElementById('stripe-form-error');
@@ -182,6 +192,8 @@
     try {
      const value = await shipping.getValue();
      if (!value.complete) throw new Error('Complete your shipping address before paying.');
+     let billingAddress = value.value;
+     if (!sameBilling.checked) {const billingValue = await billing.getValue(); if (!billingValue.complete) throw new Error('Complete your billing address before paying.'); billingAddress = billingValue.value;}
      const current = actions.getSession();
      const update = await actions.runServerUpdate(() => api({action:'shipping',sessionId:current.id,shippingDetails:value.value}));
      if (update.type === 'error') throw new Error(update.error.message);
@@ -191,7 +203,7 @@
      shipping.unmount(); shippingMounted = false;
      shippingContainer.textContent = 'Shipping address confirmed. Processing payment…';
      confirmationAttempted = true;
-     const result = await actions.confirm({email:document.getElementById('preorder-email').value,redirect:'if_required'});
+     const result = await actions.confirm({email:document.getElementById('preorder-email').value,billingAddress,redirect:'if_required'});
      if (result.type === 'error') {confirmationAttempted = false; throw new Error(result.error.message);}
      await verify();
     } catch (error) {
@@ -204,8 +216,8 @@
     }
    };
    checkout = {
-    destroy: () => {shipping.destroy(); payment.destroy();},
-    mount: () => {shipping.mount('#stripe-shipping'); shippingMounted = true; payment.mount('#stripe-payment');}
+    destroy: () => {shipping.destroy(); payment.destroy(); billing?.destroy();},
+    mount: () => {shippingContainer.textContent = ''; shippingContainer.style.minHeight = ''; shipping.mount('#stripe-shipping'); shippingMounted = true; payment.mount('#stripe-payment');}
    };
    mount.hidden = false;
    checkout.mount();

@@ -66,3 +66,5 @@ https://www.ftc.gov/business-guidance/resources/business-guide-ftcs-mail-interne
 
 ## Preview configuration completed November 16
 The isolated liftera-commerce-preview D1 database is bound as ORDERS_DB in Preview. Order/event/review schemas were applied. The LIFTERA sandbox event destination sends the five listed test event types to the preview webhook; its signing secret is encrypted in Preview. Production has not been configured or enabled. Actual shipping charge, live Stripe/tax/receipt checks, production storage/webhook, and final terms/product readiness remain launch requirements.
+
+Payment collection uses an explicit same-as-shipping billing choice, with a separate Stripe Billing Address Element if needed. The validated Shipping Address Element is unmounted for confirmation as required by Stripe's server_only permission, then restored after a declined card. Shipping permission is never relaxed. Wallets including Link are disabled in the Payment Element for this card-only initial launch.

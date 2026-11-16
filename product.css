@@ -214,3 +214,5 @@ body.checkout-open{overflow-anchor:none}
 #preorder-pay{width:100%;border:0;cursor:pointer;font-family:inherit;min-height:50px;margin-top:22px}
 #preorder-pay:disabled{opacity:.6;cursor:wait}
 #preorder-payment-form .stripe-delivery-note{font:12px/1.7 Arial,sans-serif;color:#5c6370;margin:12px 0 0}
+
+.stripe-billing-same{display:flex!important;align-items:flex-start;gap:10px;font:14px/1.6 Arial,sans-serif!important;color:#30313d!important;margin:22px 0 0!important}.stripe-billing-same input{width:18px;height:18px;flex:none;margin:3px 0 0;accent-color:#166a66}#preorder-billing-fields[hidden]{display:none}
