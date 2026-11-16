@@ -23,8 +23,8 @@ The new endpoint is POST /api/preorder. The old /api/checkout endpoint remains a
 - Preview hostnames always require matching test keys; production liftera.shop/www.liftera.shop always require matching live keys.
 - Create requires the current policy acknowledgement; price, quantity, shipping amount, and terms metadata are server-owned.
 - Signed HttpOnly, Secure, SameSite=Lax session cookies expire within 24h and are host-bound.
-- Full embedded Stripe page; server-only shipping changes validate the state and address before Stripe accepts shipping details.
-- The shipping callback is a deprecated Stripe embedded-page capability. Its availability MUST be verified in the actual sandbox and live account before approval. If unavailable, migrate to the supported Checkout form flow; never remove the lower-48 restriction just to make payment work.
+- Stripe Checkout Form SDK (ui_mode=form). The form handles card, email, billing and shipping fields in Stripe’s iframe. Its confirm handler runs authenticated server-side shipping validation and a server rate update before calling Stripe confirm. Unsupported states are rejected before the normal Pay flow proceeds. Any paid address/total anomaly still becomes needs_review and is never auto-fulfilled.
+- Express wallet buttons are disabled for this initial launch so they cannot bypass shipping validation. Card payments and 3DS use the Stripe form.
 - Stripe is the source of truth. Status checks and signed webhooks retrieve the latest session and expanded line items/payment. D1 records only paid + complete orders.
 - Records are idempotent by session; duplicate delivery cannot reset a shipped order or erase refunds. Unexpected shipping/total/line-item cases become needs_review.
 - Full refunds and dispute flags are tracked. No automatic shipment or refund is performed.

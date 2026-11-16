@@ -152,16 +152,45 @@
    if (data.paid) {await verify(); return;}
    await loadStripe();
    const stripe = window.Stripe(data.publishableKey);
-   checkout = await stripe.createEmbeddedCheckoutPage({
-    fetchClientSecret: () => Promise.resolve(data.clientSecret),
-    onComplete: verify,
-    onShippingDetailsChange: async event => {
-     try {await api({action:'shipping',sessionId:event.checkoutSessionId,shippingDetails:event.shippingDetails}); return {type:'accept'};}
-     catch (error) {return {type:'reject',errorMessage:error.message};}
-    }
+   const sdk = stripe.initCheckoutFormSdk({
+    clientSecret:data.clientSecret,
+    appearance:{theme:'stripe',variables:{colorPrimary:'#48D1CC',colorPrimaryText:'#101010',fontFamily:'Arial, sans-serif',borderRadius:'4px'}},
+    savedPaymentMethod:{enableSave:'never',enableRedisplay:'never'}
+   });
+   const loaded = await sdk.loadActions();
+   if (loaded.type !== 'success') throw new Error('Stripe could not prepare checkout. Please try again.');
+   const actions = loaded.actions;
+   const form = sdk.createForm({layout:'expanded',expressCheckout:{paymentMethods:{applePay:'never',googlePay:'never',link:'never',paypal:'never',klarna:'never',amazonPay:'never'}}});
+   checkout = form;
+   const formError = document.getElementById('stripe-form-error');
+   let confirming = false;
+   let latestAddress;
+   form.on('change', event => {latestAddress = event.value?.shippingAddress;});
+   const showTotal = session => {
+    document.getElementById('preorder-live-total').textContent = session.total.total.amount;
+   };
+   showTotal(actions.getSession());
+   sdk.on('change', showTotal);
+   form.on('confirm', async event => {
+    if (confirming) return;
+    confirming = true;
+    formError.textContent = '';
+    try {
+     const current = actions.getSession();
+     const shippingDetails = latestAddress || current.shippingAddress;
+     const update = await actions.runServerUpdate(() => api({action:'shipping',sessionId:current.id,shippingDetails}));
+     if (update.type === 'error') throw new Error(update.error.message);
+     showTotal(actions.getSession());
+     const result = await actions.confirm({formConfirmEvent:event,redirect:'if_required'});
+     if (result.type === 'error') throw new Error(result.error.message);
+     await verify();
+    } catch (error) {
+     formError.textContent = error.message || 'Payment could not be completed. Check the details and try again.';
+     formError.focus({preventScroll:true});
+    } finally {confirming = false;}
    });
    mount.hidden = false;
-   checkout.mount('#stripe-checkout');
+   checkout.mount('#stripe-form');
    setState('ready');
   } catch (error) {
    checkout?.destroy();

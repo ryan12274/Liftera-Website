@@ -40,7 +40,8 @@ test('price, terms, shipping restrictions and idempotency are owned by server',a
   const first=await onRequest({request:req(create),env}),cookie=first.headers.get('Set-Cookie').split(';')[0];assert.equal(first.status,200);
   const params=calls[0].options.body;
   assert.equal(params.get('line_items[0][price_data][unit_amount]'),'3500');
-  assert.equal(params.get('permissions[update_shipping_details]'),'server_only');
+  assert.equal(params.get('ui_mode'),'form');
+  assert.equal(params.has('permissions[update_shipping_details]'),false);
   assert.equal(params.has('expires_at'),false,'retry parameters must remain stable');
   assert.equal(params.get('metadata[terms_accepted]'),'true');
   assert.equal(params.get('metadata[ship_estimate]'),'mid-December 2026');
@@ -52,7 +53,7 @@ test('price, terms, shipping restrictions and idempotency are owned by server',a
    assert.equal((await onRequest({request:req({...shipping,shippingDetails:{...address,address:{...address.address,state}}},{headers:{Cookie:cookie}}),env})).status,422,state);
   }
   const good=await onRequest({request:req(shipping,{headers:{Cookie:cookie}}),env});assert.equal(good.status,200);
-  assert.equal(calls.at(-1).options.body.get('collected_information[shipping_details][address][state]'),'MN');
+  assert.equal(calls.at(-1).url.endsWith('/checkout/sessions/'+session().id),true);
   assert.equal(calls.at(-1).options.body.get('shipping_options[0][shipping_rate_data][fixed_amount][amount]'),'0');
   assert.equal((await onRequest({request:req({...shipping,sessionId:'cs_test_other'},{headers:{Cookie:cookie}}),env})).status,403);
  }finally{globalThis.fetch=previous;}

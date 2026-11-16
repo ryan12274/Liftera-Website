@@ -159,3 +159,21 @@ body.checkout-open{overflow-anchor:none}
 #preorder-continue:disabled{opacity:.45;cursor:not-allowed}
 .preorder-review .preorder-review-note{font-size:12px;margin-bottom:0}
 @media(max-width:600px){.preorder-review{padding:28px 20px}.preorder-review h3{font-size:28px}.preorder-review-lines>div{font-size:13px;gap:16px}.preorder-review-lines dd{max-width:24ch}.preorder-highlights>div{grid-template-columns:90px 1fr}}
+
+/* Stripe's current form integration keeps payment fields in its secure iframe. */
+#stripe-checkout.stripe-form-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);align-items:start;min-height:0}
+#stripe-checkout.stripe-form-layout[hidden]{display:none}
+.preorder-order-summary{padding:36px}
+.preorder-order-summary>img{display:block;width:100%;height:auto;max-height:280px;object-fit:contain;background:#181a18;border-radius:4px;margin-bottom:28px}
+.preorder-order-summary .eyebrow{margin-bottom:12px}
+.preorder-order-summary h3{font-size:32px;line-height:1.2}
+.preorder-order-summary p{font-size:13px;line-height:1.8;color:#b5bfb8}
+.preorder-order-summary dl{margin-top:26px}
+.preorder-order-summary dl>div{padding:16px 0;border-top:1px solid #303632;font-size:13px}
+.preorder-order-summary dt{color:#aeb7b1;margin-bottom:8px}
+.preorder-order-summary dd{margin:0;color:#fff}
+#preorder-live-total{font-size:28px}
+.stripe-form-card{background:#fff;border-radius:6px;padding:28px;min-width:0}
+#stripe-form-error{color:#b42318;font-size:14px;line-height:1.6;margin:16px 0 0}
+#stripe-form-error:empty{display:none}
+@media(max-width:800px){#stripe-checkout.stripe-form-layout{grid-template-columns:1fr}.preorder-order-summary{padding:24px}.preorder-order-summary>img{float:left;width:76px;height:60px;margin:0 16px 14px 0}.preorder-order-summary .eyebrow{display:none}.preorder-order-summary h3{font-size:25px}.preorder-order-summary>p{margin:8px 0 0}.preorder-order-summary dl{clear:both;display:flex;gap:24px;margin-top:20px}.preorder-order-summary dl>div{flex:1}.preorder-order-summary dd{font-size:14px}#preorder-live-total{font-size:24px}.stripe-form-card{padding:22px 18px}.preorder-order-summary .preorder-review-note{font-size:12px}}
