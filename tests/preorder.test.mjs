@@ -40,8 +40,8 @@ test('price, terms, shipping restrictions and idempotency are owned by server',a
   const first=await onRequest({request:req(create),env}),cookie=first.headers.get('Set-Cookie').split(';')[0];assert.equal(first.status,200);
   const params=calls[0].options.body;
   assert.equal(params.get('line_items[0][price_data][unit_amount]'),'3500');
-  assert.equal(params.get('ui_mode'),'form');
-  assert.equal(params.has('permissions[update_shipping_details]'),false);
+  assert.equal(params.get('ui_mode'),'elements');
+  assert.equal(params.get('permissions[update_shipping_details]'),'server_only');
   assert.equal(params.has('expires_at'),false,'retry parameters must remain stable');
   assert.equal(params.get('metadata[terms_accepted]'),'true');
   assert.equal(params.get('metadata[ship_estimate]'),'mid-December 2026');

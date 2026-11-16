@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <link rel="icon" href="lifteralogo.svg?v=5">
 <link rel="stylesheet" href="styles.css?v=demand-20261111">
-<link rel="stylesheet" href="product.css?v=preorders-form-20261116">
+<link rel="stylesheet" href="product.css?v=preorders-elements-20261116">
 </head>
 <body class="clean-home drop-page">
 <a class="skip-link" href="#main-content">Skip to content</a>
@@ -79,7 +79,7 @@
 <button id="checkout-action" class="button button-primary" type="button" hidden>Try again</button>
 <a id="checkout-success-link" href="index.html#waitlist" hidden>Get real launch updates <span aria-hidden="true">↗</span></a>
 </div>
-<div id="stripe-checkout" class="stripe-form-layout" hidden><aside class="preorder-order-summary"><img src="drop-chain-prototype.jpg" width="1600" height="1067" alt="Drop Chain prototype, final design may change"><p class="eyebrow">YOUR PREORDER</p><h3>Drop Chain</h3><p>One attachment. Belt and plates not included.</p><dl><div><dt>Total due now</dt><dd id="preorder-live-total">$35.00</dd></div><div><dt>Estimated shipment</dt><dd>Mid-December 2026</dd></div></dl><p class="preorder-review-note">Prototype shown. Cancel before shipment for a full refund. Test checkout does not place an order.</p></aside><div class="stripe-form-card"><div id="stripe-form"></div><p id="stripe-form-error" role="alert" tabindex="-1"></p></div></div>
+<div id="stripe-checkout" class="stripe-form-layout" hidden><aside class="preorder-order-summary"><img src="drop-chain-prototype.jpg" width="1600" height="1067" alt="Drop Chain prototype, final design may change"><p class="eyebrow">YOUR PREORDER</p><h3>Drop Chain</h3><p>One attachment. Belt and plates not included.</p><dl><div><dt>Total due now</dt><dd id="preorder-live-total">$35.00</dd></div><div><dt>Estimated shipment</dt><dd>Mid-December 2026</dd></div></dl><p class="preorder-review-note">Prototype shown. Cancel before shipment for a full refund. Test checkout does not place an order.</p></aside><div class="stripe-form-card"><form id="preorder-payment-form"><label for="preorder-email">Email for your order</label><input id="preorder-email" name="email" type="email" autocomplete="email" maxlength="254" required><h3>Shipping address</h3><div id="stripe-shipping"></div><p class="stripe-delivery-note">Lower 48 U.S. states and Washington, D.C. only.</p><h3>Payment details</h3><div id="stripe-payment"></div><p id="stripe-form-error" role="alert" tabindex="-1"></p><button id="preorder-pay" class="button button-primary" type="submit">Continue securely</button><p class="stripe-delivery-note">Payment is processed by Stripe. Preorders are estimated to ship mid-December 2026. Cancel before shipment for a full refund.</p></form></div></div>
 </div>
 <div class="checkout-help"><p>Questions? <a href="mailto:Liftera.mn@yahoo.com?subject=Drop%20Chain%20checkout%20question">Contact LIFTERA <span aria-hidden="true">↗</span></a></p><div><a href="preorder-policy.html" target="_blank" rel="noopener">Draft preorder policy <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a><a href="privacy.html" target="_blank" rel="noopener">Privacy <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a></div></div>
 <details class="checkout-test-help"><summary>How to try a test payment</summary><p>Use fictitious contact and U.S. address details with Stripe’s test card <code>4242 4242 4242 4242</code>, a future expiration date, and any three-digit CVC. Turn off “Save my information with Link.” Don’t enter real card details.</p></details>
@@ -95,6 +95,19 @@
 <div><h2>The planned setup</h2><ol class="drop-setup"><li><strong>Place</strong> the webbing over your lifting belt.</li><li><strong>Connect</strong> the chain to the D-rings with the specified hardware.</li><li><strong>Load</strong> weight appropriate for the movement and validated setup.</li><li><strong>Lift</strong> using the completed setup.</li></ol><p class="drop-panel-note">Final usage instructions and maximum load rating are not yet established.</p></div>
 </div></details>
 </section>
+<section class="drop-more drop-reviews" id="product-reviews" aria-label="Customer reviews">
+<details id="reviews-panel"><summary>Customer reviews <span id="reviews-count"></span></summary>
+<div class="drop-panel"><div class="reviews-heading"><h2>From the people who use it.</h2><p id="reviews-summary" role="status">Open this section to read customer reviews.</p></div>
+<div id="reviews-list" class="reviews-list"></div><button id="reviews-more" class="button button-secondary" type="button" hidden>Load more reviews</button>
+<details class="review-write" id="review-write"><summary>Write a review</summary><p>Share your own experience with Drop Chain. Reviews are checked before publication. Prototype feedback is labeled separately.</p>
+<form id="review-form"><div class="review-form-row"><div><label for="review-name">Display name</label><input id="review-name" name="displayName" autocomplete="nickname" maxlength="50" required placeholder="First name or initials"></div><div><label for="review-rating">Rating</label><select id="review-rating" name="rating" required><option value="">Choose a rating</option><option value="5">5 stars</option><option value="4">4 stars</option><option value="3">3 stars</option><option value="2">2 stars</option><option value="1">1 star</option></select></div></div>
+<label for="review-experience">What did you use?</label><select id="review-experience" name="experience" required><option value="">Choose your experience</option><option value="prototype">The prototype</option><option value="product">The physical product</option></select>
+<label for="review-body">Your review</label><textarea id="review-body" name="body" minlength="20" maxlength="1500" rows="5" required placeholder="What worked for you? What could improve?"></textarea><p class="review-form-note">20–1,500 characters. Keep personal contact details out of your review.</p>
+<label class="review-consent"><input type="checkbox" name="consent" required><span>I agree that my display name, rating and review may be published after approval.</span></label>
+<div class="review-trap" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
+<div id="review-turnstile"></div><button class="button button-primary" type="submit">Submit for approval</button><p id="review-form-status" role="status" aria-live="polite"></p>
+<p class="review-form-note">Your rating is not automatically labeled as a verified purchase. <a href="privacy.html">Review privacy details ↗</a></p>
+</form></details></div></details></section>
 </main>
 <footer class="launch-footer">
 <div class="footer-brand"><a href="index.html"><img src="lifteralogo.svg?v=5" alt="LIFTERA home"></a><p class="brand-tagline">To help avid lifters spend less money and reduce time wasted while pursuing greatness.</p></div>
@@ -104,6 +117,7 @@
 </footer>
 <script src="script.js"></script>
 <script src="product.js" defer></script>
-<script src="checkout.js?v=preorders-form-20261116" defer></script>
+<script src="reviews.js?v=20261116" defer></script>
+<script src="checkout.js?v=preorders-elements-20261116" defer></script>
 </body>
 </html>

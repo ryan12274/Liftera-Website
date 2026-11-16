@@ -1,5 +1,5 @@
 export const API_VERSION='2026-10-28.endive';
-export const MARKER='liftera-preorder-v2';
+export const MARKER='liftera-preorder-v3';
 export const TERMS={priceCents:3500,shippingEstimate:'mid-December 2026',version:'2026-11-16',estimateValidUntil:'2026-12-21T00:00:00Z',readyForLive:false};
 const STATES=new Set('AL AZ AR CA CO CT DE DC FL GA ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY'.split(' '));
 export const reply=(status,body,extra={})=>Response.json(body,{status,headers:{'Cache-Control':'no-store','X-Content-Type-Options':'nosniff',...extra}});
@@ -85,11 +85,12 @@ export async function onRequest({request,env}){
    if(s.status!=='open')return reply(409,{message:'This checkout is no longer open. Please check its payment status.'});
    if(!validAddress(input.shippingDetails))return reply(422,{message:'We currently ship to the lower 48 U.S. states and Washington, D.C. Enter a complete address in that area.'});
    const details=input.shippingDetails,a=details.address;
-   const body=new URLSearchParams({
+   const body=new URLSearchParams({'collected_information[shipping_details][name]':details.name.trim(),
     'shipping_options[0][shipping_rate_data][display_name]':ctx.testMode&&ctx.shippingCents===null?'Test shipping (rate not final)':'U.S. shipping',
-    'shipping_options[0][shipping_rate_data][type]':'fixed_amount',
+    'shipping_options[0][shipping_rate_data][type]':'fixed_amount','shipping_options[0][shipping_rate_data][tax_behavior]':'exclusive',
     'shipping_options[0][shipping_rate_data][fixed_amount][amount]':s.metadata.shipping_cents,
     'shipping_options[0][shipping_rate_data][fixed_amount][currency]':'usd'});
+   for(const k of['country','state','city','postal_code','line1','line2'])body.set('collected_information[shipping_details][address]['+k+']',a[k]||'');
    await stripeRequest(ctx.secret,'checkout/sessions/'+id,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body});
    return reply(200,{accepted:true});
   }
@@ -105,8 +106,8 @@ export async function onRequest({request,env}){
   }
   const ref='LF-'+input.requestId.replaceAll('-','').slice(0,16).toUpperCase();
   const body=new URLSearchParams({
-   ui_mode:'form',mode:'payment',
-   'allowed_payment_method_types[0]':'card',
+   ui_mode:'elements',mode:'payment',
+   'allowed_payment_method_types[0]':'card','permissions[update_shipping_details]':'server_only',
    'line_items[0][price_data][currency]':'usd','line_items[0][price_data][unit_amount]':String(TERMS.priceCents),
    'line_items[0][price_data][tax_behavior]':'exclusive',
    'line_items[0][price_data][product_data][name]':'Drop Chain preorder'+(ctx.testMode?' (TEST ONLY)':''),
@@ -114,7 +115,7 @@ export async function onRequest({request,env}){
    'line_items[0][price_data][product_data][images][0]':ctx.url.origin+'/drop-chain-prototype.jpg',
    'line_items[0][quantity]':'1','shipping_address_collection[allowed_countries][0]':'US',
    'shipping_options[0][shipping_rate_data][display_name]':'Address validation required',
-   'shipping_options[0][shipping_rate_data][type]':'fixed_amount',
+   'shipping_options[0][shipping_rate_data][type]':'fixed_amount','shipping_options[0][shipping_rate_data][tax_behavior]':'exclusive',
    'shipping_options[0][shipping_rate_data][fixed_amount][amount]':String(ctx.shippingCents??0),
    'shipping_options[0][shipping_rate_data][fixed_amount][currency]':'usd',
    return_url:ctx.url.origin+'/checkout-return?session_id={CHECKOUT_SESSION_ID}',

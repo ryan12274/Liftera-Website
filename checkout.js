@@ -152,45 +152,52 @@
    if (data.paid) {await verify(); return;}
    await loadStripe();
    const stripe = window.Stripe(data.publishableKey);
-   const sdk = stripe.initCheckoutFormSdk({
+   const sdk = stripe.initCheckoutElementsSdk({
     clientSecret:data.clientSecret,
-    appearance:{theme:'stripe',variables:{colorPrimary:'#48D1CC',colorPrimaryText:'#101010',fontFamily:'Arial, sans-serif',borderRadius:'4px'}},
-    savedPaymentMethod:{enableSave:'never',enableRedisplay:'never'}
+    elementsOptions:{appearance:{theme:'stripe',variables:{colorPrimary:'#48D1CC',fontFamily:'Arial, sans-serif',borderRadius:'4px'}},savedPaymentMethod:{enableSave:'never',enableRedisplay:'never'}}
    });
    const loaded = await sdk.loadActions();
    if (loaded.type !== 'success') throw new Error('Stripe could not prepare checkout. Please try again.');
    const actions = loaded.actions;
-   const form = sdk.createForm({layout:'expanded',expressCheckout:{paymentMethods:{applePay:'never',googlePay:'never',link:'never',paypal:'never',klarna:'never',amazonPay:'never'}}});
-   checkout = form;
+   const shipping = sdk.createShippingAddressElement({autocomplete:{mode:'disabled'}});
+   const payment = sdk.createPaymentElement({layout:'tabs'});
+   const form = document.getElementById('preorder-payment-form');
+   const pay = document.getElementById('preorder-pay');
    const formError = document.getElementById('stripe-form-error');
-   let confirming = false;
-   let latestAddress;
-   form.on('change', event => {latestAddress = event.value?.shippingAddress;});
+   let submitting = false;
    const showTotal = session => {
     document.getElementById('preorder-live-total').textContent = session.total.total.amount;
+    pay.textContent = (config.testMode ? 'Test payment · ' : 'Pay ') + session.total.total.amount;
    };
    showTotal(actions.getSession());
    sdk.on('change', showTotal);
-   form.on('confirm', async event => {
-    if (confirming) return;
-    confirming = true;
-    formError.textContent = '';
+   form.onsubmit = async event => {
+    event.preventDefault();
+    if (submitting || !form.reportValidity()) return;
+    submitting = true; pay.disabled = true; formError.textContent = '';
+    let confirmationAttempted = false;
     try {
+     const value = await shipping.getValue();
+     if (!value.complete) throw new Error('Complete your shipping address before paying.');
      const current = actions.getSession();
-     const shippingDetails = latestAddress || current.shippingAddress;
-     const update = await actions.runServerUpdate(() => api({action:'shipping',sessionId:current.id,shippingDetails}));
+     const update = await actions.runServerUpdate(() => api({action:'shipping',sessionId:current.id,shippingDetails:value.value}));
      if (update.type === 'error') throw new Error(update.error.message);
      showTotal(actions.getSession());
-     const result = await actions.confirm({formConfirmEvent:event,redirect:'if_required'});
-     if (result.type === 'error') throw new Error(result.error.message);
+     confirmationAttempted = true;
+     const result = await actions.confirm({email:document.getElementById('preorder-email').value,redirect:'if_required'});
+     if (result.type === 'error') {confirmationAttempted = false; throw new Error(result.error.message);}
      await verify();
     } catch (error) {
-     formError.textContent = error.message || 'Payment could not be completed. Check the details and try again.';
-     formError.focus({preventScroll:true});
-    } finally {confirming = false;}
-   });
+     if (confirmationAttempted) setState('verify-error','We could not confirm the result','Please check the payment status before attempting another payment.','Check payment status');
+     else {formError.textContent = error.message || 'Check your details and try again.'; formError.focus({preventScroll:true});}
+    } finally {submitting = false; pay.disabled = false;}
+   };
+   checkout = {
+    destroy: () => {shipping.destroy(); payment.destroy();},
+    mount: () => {shipping.mount('#stripe-shipping'); payment.mount('#stripe-payment');}
+   };
    mount.hidden = false;
-   checkout.mount('#stripe-form');
+   checkout.mount();
    setState('ready');
   } catch (error) {
    checkout?.destroy();
