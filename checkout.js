@@ -167,7 +167,9 @@
   else showProduct();
  });
  window.addEventListener('pageshow', () => {
-  if (!section.hidden) window.scrollTo({top:0, behavior:'instant'});
+  if (!section.hidden) requestAnimationFrame(() => requestAnimationFrame(() => {
+   if (!section.hidden && document.activeElement === heading) window.scrollTo({top:0, behavior:'instant'});
+  }));
  });
  if (location.hash === '#checkout') showCheckout();
 })();

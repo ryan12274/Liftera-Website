@@ -132,3 +132,6 @@
  .checkout-state,.checkout-stage,#stripe-checkout{min-height:440px}
 }
 @media(prefers-reduced-motion:reduce){.checkout-state-icon{animation:none!important}}
+
+/* Stripe changes height as it loads; keep browser scroll anchoring from moving the checkout heading. */
+body.checkout-open{overflow-anchor:none}
