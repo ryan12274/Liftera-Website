@@ -6,7 +6,7 @@ const {onRequest}=await import('data:text/javascript;base64,'+Buffer.from(source
 const env={STRIPE_SECRET_KEY:'sk_test_local_fixture_only',STRIPE_PUBLISHABLE_KEY:'pk_test_local_fixture_only'};
 const base='https://preview.lifterashop.pages.dev';
 const requestId='7c7a9029-72ca-4c04-9161-9ec934a2b51d';
-const session={id:'cs_test_fixture123',livemode:false,metadata:{integration:'liftera-preview-v2'},currency:'usd',amount_total:3500,status:'open',payment_status:'unpaid',client_secret:'test_client_secret_fixture'};
+const session={id:'cs_test_fixture123',livemode:false,metadata:{integration:'liftera-preview-v3'},currency:'usd',amount_total:3500,status:'open',payment_status:'unpaid',client_secret:'test_client_secret_fixture'};
 const req=(body={action:'create',requestId},options={})=>new Request((options.origin||base)+'/api/checkout',{method:options.method||'POST',headers:{Origin:options.sender||options.origin||base,'Content-Type':'application/json',...options.headers},...(options.method==='GET'?{}:{body:typeof body==='string'?body:JSON.stringify(body)})});
 test('production, cross-origin requests, live keys, and missing keys cannot create sessions',async()=>{
  const previous=globalThis.fetch;let calls=0;globalThis.fetch=async()=>{calls++;throw Error('unexpected');};
@@ -36,6 +36,7 @@ test('server owns the price, US destination, test mode, and session ownership',a
   const params=calls[0].options.body;
   assert.equal(params.get('line_items[0][price_data][unit_amount]'),'3500');
   assert.equal(params.get('line_items[0][quantity]'),'1');
+  assert.equal(params.get('line_items[0][price_data][product_data][images][0]'),base+'/drop-chain-prototype.jpg');
   assert.equal(params.get('shipping_address_collection[allowed_countries][0]'),'US');
   assert.equal(params.get('ui_mode'),'embedded_page');
   assert.equal(params.get('allowed_payment_method_types[0]'),'card');

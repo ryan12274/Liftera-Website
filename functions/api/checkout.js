@@ -1,6 +1,6 @@
 const API_VERSION = '2026-10-28.endive';
 const COOKIE = 'liftera_checkout_test';
-const MARKER = 'liftera-preview-v2';
+const MARKER = 'liftera-preview-v3';
 const headers = {'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff'};
 const reply = (status, body, extra = {}) => Response.json(body, {status, headers: {...headers, ...extra}});
 const previewHost = hostname => /^(preview|[a-f0-9]{8})\.lifterashop\.pages\.dev$/.test(hostname);
@@ -74,7 +74,8 @@ export async function onRequest({request, env}) {
    'line_items[0][price_data][currency]':'usd',
    'line_items[0][price_data][unit_amount]':'3500',
    'line_items[0][price_data][product_data][name]':'Drop Chain preorder (TEST ONLY)',
-   'line_items[0][price_data][product_data][description]':'Preview demonstration only. No real order or product reservation. Final price and shipping details are not confirmed.',
+   'line_items[0][price_data][product_data][description]':'1 attachment only. Belt and plates not included. Prototype shown; final design may change.',
+   'line_items[0][price_data][product_data][images][0]':url.origin+'/drop-chain-prototype.jpg',
    'line_items[0][quantity]':'1',
    'shipping_address_collection[allowed_countries][0]':'US',
    'redirect_on_completion':'if_required',

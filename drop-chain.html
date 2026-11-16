@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <link rel="icon" href="lifteralogo.svg?v=5">
 <link rel="stylesheet" href="styles.css?v=demand-20261111">
-<link rel="stylesheet" href="product.css?v=stripe-branding-20261113">
+<link rel="stylesheet" href="product.css?v=checkout-polish-20261116">
 </head>
 <body class="clean-home drop-page">
 <a class="skip-link" href="#main-content">Skip to content</a>
@@ -46,7 +46,11 @@
 <p class="drop-order-note">Price is tentative. U.S. delivery is planned; shipping costs and the estimated shipping date are still being finalized.</p>
 <a class="button button-primary drop-buy" href="index.html#waitlist">Notify me when preorders open</a>
 <p class="trade-checkout-note">Free launch updates. No payment or product reservation.</p>
-<div class="checkout-test-invite"><p><strong>Preview only:</strong> try the $35 U.S. preorder checkout using Stripe test mode.</p><button id="start-checkout" class="button button-secondary" type="button" aria-controls="stripe-preview">Try embedded test checkout</button><p><a class="draft-policy-link" href="preorder-policy.html">Review the draft cancellation &amp; refund policy ↗</a></p></div>
+<div class="checkout-test-invite">
+<div class="checkout-invite-heading"><span class="checkout-test-pill">TEST MODE</span><p>Take a look at checkout before launch.</p></div>
+<button id="start-checkout" class="button button-secondary" type="button" aria-controls="stripe-preview" aria-expanded="false">Preview checkout <span aria-hidden="true">→</span></button>
+<p class="checkout-invite-note">A $35 test only. No charge or product reservation.</p>
+</div>
 </div>
 <div class="drop-ve" aria-labelledby="ve-title">
 <div><h2 id="ve-title">Shopping with VE?</h2><p>$34.99 through the Virtual Enterprises educational marketplace. <strong>No physical product will be shipped.</strong> Complete the transaction in VE checkout. <a href="mailto:Liftera.mn@yahoo.com?subject=VE%20order%20question">Order questions? Email us.</a></p></div>
@@ -56,7 +60,23 @@
 
 </div>
 </section>
-<section id="stripe-preview" class="stripe-preview" hidden aria-labelledby="stripe-preview-title"><div class="checkout-test-banner"><p class="eyebrow">STRIPE / TEST MODE</p><h2 id="stripe-preview-title">Preview your checkout.</h2><p>This is a test of a $35 USD Drop Chain preorder, with a U.S. shipping address. No real payments or product reservations. Shipping and taxes are not finalized. Use test details only.</p></div><p id="checkout-status" role="status" aria-live="polite"></p><div id="stripe-checkout"></div><noscript>Enable JavaScript to preview Stripe checkout.</noscript></section>
+<section id="stripe-preview" class="stripe-preview" hidden aria-labelledby="stripe-preview-title" data-state="idle">
+<div class="checkout-toolbar"><button id="back-to-product" class="checkout-back" type="button"><span aria-hidden="true">←</span> Back to product</button><span class="checkout-test-pill">TEST MODE</span></div>
+<div class="checkout-heading"><div><p class="eyebrow">LIFTERA / DROP CHAIN</p><h2 id="stripe-preview-title" tabindex="-1">Checkout</h2></div><p class="checkout-security"><svg width="16" height="18" viewBox="0 0 16 18" fill="none" aria-hidden="true"><path d="M4 8V5a4 4 0 0 1 8 0v3M3 8h10v9H3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>Payment handled by Stripe</p></div>
+<p class="checkout-preview-note">Preview only. No real payment or reservation. Shipping date, shipping costs, and taxes are not finalized.</p>
+<div class="checkout-stage">
+<div id="checkout-state" class="checkout-state">
+<span id="checkout-state-icon" class="checkout-state-icon" aria-hidden="true"></span>
+<h3 id="checkout-state-title">Loading checkout</h3>
+<p id="checkout-status" role="status" aria-live="polite" aria-atomic="true"></p>
+<button id="checkout-action" class="button button-primary" type="button" hidden>Try again</button>
+<a id="checkout-success-link" href="index.html#waitlist" hidden>Get real launch updates <span aria-hidden="true">↗</span></a>
+</div>
+<div id="stripe-checkout" hidden></div>
+</div>
+<div class="checkout-help"><p>Questions? <a href="mailto:Liftera.mn@yahoo.com?subject=Drop%20Chain%20checkout%20question">Contact LIFTERA <span aria-hidden="true">↗</span></a></p><div><a href="preorder-policy.html" target="_blank" rel="noopener">Draft preorder policy <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a><a href="privacy.html" target="_blank" rel="noopener">Privacy <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a></div></div>
+<details class="checkout-test-help"><summary>How to try a test payment</summary><p>Use fictitious contact and U.S. address details with Stripe’s test card <code>4242 4242 4242 4242</code>, a future expiration date, and any three-digit CVC. Turn off “Save my information with Link.” Don’t enter real card details.</p></details>
+</section>
 <section class="drop-more" aria-label="Product demonstrations and specifications">
 <details><summary>Watch the prototype: dips &amp; pull-ups</summary>
 <div class="drop-panel"><div class="prototype-media-grid drop-demo-grid"><figure><video controls playsinline preload="none" width="540" height="960" poster="media/prototype-pull-ups.jpg" aria-label="Drop Chain prototype during pull-ups" aria-describedby="pull-ups-caption"><source src="media/prototype-pull-ups.mp4" type="video/mp4">Your browser does not support embedded video. <a href="media/prototype-pull-ups.mp4">Watch the pull-up clip</a>.</video><figcaption id="pull-ups-caption"><h3>Pull-ups</h3><p>A short development clip showing the prototype attached to a lifting belt during pull-ups. Silent video.</p></figcaption></figure>
@@ -77,6 +97,6 @@
 </footer>
 <script src="script.js"></script>
 <script src="product.js" defer></script>
-<script src="checkout.js?v=20261113" defer></script>
+<script src="checkout.js?v=polish-20261116" defer></script>
 </body>
 </html>
