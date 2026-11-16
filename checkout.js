@@ -124,6 +124,7 @@
    document.getElementById('preorder-checkout-note').textContent = 'Full payment now. Estimated to ship ' + config.shippingEstimate + '. Cancel before shipment for a full refund.';
    document.querySelector('.checkout-test-help').hidden = true;
    document.querySelector('.checkout-help a[href="preorder-policy.html"]').firstChild.textContent = 'Preorder & return policy ';
+   document.getElementById('preorder-order-note').textContent = 'Prototype shown. Cancel before shipment for a full refund. Unused returns can be requested within 30 days after delivery.';
    document.getElementById('preorder-agreement-text').textContent = 'I understand this is a preorder, payment is collected now, shipment is estimated for ' + config.shippingEstimate + ', and I agree to the preorder and return terms.';
    continueButton.textContent = 'Continue to secure payment →';
   }

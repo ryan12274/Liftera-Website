@@ -63,3 +63,6 @@ https://docs.stripe.com/checkout/fulfillment?ui=full-page
 https://docs.stripe.com/receipts
 https://docs.stripe.com/events/manage-webhook-endpoints
 https://www.ftc.gov/business-guidance/resources/business-guide-ftcs-mail-internet-or-telephone-order-merchandise-rule
+
+## Preview configuration completed November 16
+The isolated liftera-commerce-preview D1 database is bound as ORDERS_DB in Preview. Order/event/review schemas were applied. The LIFTERA sandbox event destination sends the five listed test event types to the preview webhook; its signing secret is encrypted in Preview. Production has not been configured or enabled. Actual shipping charge, live Stripe/tax/receipt checks, production storage/webhook, and final terms/product readiness remain launch requirements.
