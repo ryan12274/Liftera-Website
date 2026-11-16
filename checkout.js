@@ -166,6 +166,8 @@
    const pay = document.getElementById('preorder-pay');
    const formError = document.getElementById('stripe-form-error');
    let submitting = false;
+   let shippingMounted = false;
+   const shippingContainer = document.getElementById('stripe-shipping');
    const showTotal = session => {
     document.getElementById('preorder-live-total').textContent = session.total.total.amount;
     pay.textContent = (config.testMode ? 'Test payment · ' : 'Pay ') + session.total.total.amount;
@@ -184,6 +186,10 @@
      const update = await actions.runServerUpdate(() => api({action:'shipping',sessionId:current.id,shippingDetails:value.value}));
      if (update.type === 'error') throw new Error(update.error.message);
      showTotal(actions.getSession());
+     // Server-only shipping must be detached before Stripe confirms the validated address.
+     shippingContainer.style.minHeight = shippingContainer.getBoundingClientRect().height + 'px';
+     shipping.unmount(); shippingMounted = false;
+     shippingContainer.textContent = 'Shipping address confirmed. Processing payment…';
      confirmationAttempted = true;
      const result = await actions.confirm({email:document.getElementById('preorder-email').value,redirect:'if_required'});
      if (result.type === 'error') {confirmationAttempted = false; throw new Error(result.error.message);}
@@ -192,11 +198,14 @@
      if (config.testMode) console.warn('Preview checkout confirmation:', String(error.message || error).replace(/(?:cs_(?:test|live)_[A-Za-z0-9]+_secret_|whsec_|sk_(?:test|live)_)[A-Za-z0-9]+/g,'[redacted]'));
      if (confirmationAttempted) setState('verify-error','We could not confirm the result','Please check the payment status before attempting another payment.','Check payment status');
      else {formError.textContent = error.message || 'Check your details and try again.'; formError.focus({preventScroll:true});}
-    } finally {submitting = false; pay.disabled = false;}
+    } finally {
+     if (checkout && !shippingMounted) {shippingContainer.textContent = ''; shipping.mount('#stripe-shipping'); shippingMounted = true; shippingContainer.style.minHeight = '';}
+     submitting = false; pay.disabled = false;
+    }
    };
    checkout = {
     destroy: () => {shipping.destroy(); payment.destroy();},
-    mount: () => {shipping.mount('#stripe-shipping'); payment.mount('#stripe-payment');}
+    mount: () => {shipping.mount('#stripe-shipping'); shippingMounted = true; payment.mount('#stripe-payment');}
    };
    mount.hidden = false;
    checkout.mount();

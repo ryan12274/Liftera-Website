@@ -25,6 +25,8 @@
   finally{busy=false;more.disabled=false;}
  };
  panel.addEventListener('toggle',()=>{if(panel.open&&!loaded)load();});more.addEventListener('click',load);
+ const reveal=()=>{if(location.hash==='#product-reviews'){panel.open=true;if(!loaded)load();}};
+ window.addEventListener('hashchange',reveal);reveal();
  const security=()=>{
   if(securityPromise)return securityPromise;
   securityPromise=new Promise((resolve,reject)=>{
