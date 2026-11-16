@@ -161,7 +161,7 @@
    if (loaded.type !== 'success') throw new Error('Stripe could not prepare checkout. Please try again.');
    const actions = loaded.actions;
    const shipping = sdk.createShippingAddressElement({autocomplete:{mode:'disabled'}});
-   const payment = sdk.createPaymentElement({layout:'tabs',fields:{billingDetails:'never'},wallets:{applePay:'never',googlePay:'never',link:'never'}});
+   const payment = sdk.createPaymentElement({layout:'tabs',fields:{billingDetails:{name:'never',email:'never',address:'never'}},wallets:{applePay:'never',googlePay:'never',link:'never'}});
    const sameBilling = document.getElementById('preorder-billing-same');
    const billingFields = document.getElementById('preorder-billing-fields');
    let billing;

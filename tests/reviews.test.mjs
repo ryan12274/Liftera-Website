@@ -33,9 +33,11 @@ test('submissions stay private until approved and averages only count published 
   assert.equal((await onRequest({request:post(),env})).status,202);
   assert.equal((await onRequest({request:post({...data,rating:5}),env})).status,202);
   assert.equal(db.sql.prepare('SELECT count(*) AS n FROM product_reviews').get().n,1,'daily duplicate must not add a vote');
+  assert.equal((await onRequest({request:post({...data,displayName:'Second QA fixture',body:'Another unit-test fixture from the same school network.'}),env})).status,202);
+  assert.equal(db.sql.prepare('SELECT count(*) AS n FROM product_reviews').get().n,2,'different reviewers on one network must be accepted');
   const pending=await (await onRequest({request:get(),env})).json();
   assert.deepEqual(pending.reviews,[]);assert.equal(pending.count,0);assert.equal(pending.average,null);
-  db.sql.prepare("UPDATE product_reviews SET status='approved',published_at='2026-11-16T12:00:00Z'").run();
+  db.sql.prepare("UPDATE product_reviews SET status='approved',published_at='2026-11-16T12:00:00Z' WHERE display_name='QA fixture'").run();
   const published=await (await onRequest({request:get(),env})).json();
   assert.equal(published.count,1);assert.equal(published.average,4);
   assert.equal(published.reviews[0].display_name,'QA fixture');

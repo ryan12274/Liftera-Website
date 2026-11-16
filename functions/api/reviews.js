@@ -37,7 +37,7 @@ export async function onRequest({request,env}){
   if(!verification.ok)return reply(503,{message:'The security check is unavailable. Please try again.'});
   const result=await verification.json();
   if(!result.success||result.hostname!==url.hostname||result.action!=='review')return reply(400,{message:'The security check expired. Please try again.'});
-  const dailyKey=await hmac(new Date().toISOString().slice(0,10)+'|'+url.hostname+'|'+ip,env.TURNSTILE_SECRET),id=crypto.randomUUID();
+  const dailyKey=await hmac(new Date().toISOString().slice(0,10)+'|'+url.hostname+'|'+ip+'|'+name.toLowerCase()+'|'+body,env.TURNSTILE_SECRET),id=crypto.randomUUID();
   await env.ORDERS_DB.prepare("INSERT INTO product_reviews (id,display_name,rating,body,experience,test_mode,dedupe_key) VALUES (?1,?2,?3,?4,?5,?6,?7) ON CONFLICT(dedupe_key) DO NOTHING").bind(id,name,input.rating,body,input.experience,testMode,dailyKey).run();
   return reply(202,{message:'Thanks. Your review has been submitted for approval. It will not appear publicly until reviewed.'});
  }catch{return reply(503,{message:'Your review could not be saved. Please try again.'});}
