@@ -87,15 +87,15 @@
 .checkout-test-pill{display:inline-flex;align-items:center;flex-shrink:0;border:1px solid #46615a;border-radius:3px;padding:4px 8px;color:#a7e4df;background:#16201d;font:11px/1.4 Alata,Arial,sans-serif;letter-spacing:.08em}
 .checkout-test-invite button{display:inline-flex;align-items:center;justify-content:center;gap:24px;min-height:48px;color:#fff;background:transparent;cursor:pointer;font-family:inherit;border-color:#67746c}
 .checkout-invite-note{font-size:12px;color:#aeb7b1;line-height:1.7;margin:10px 0 0}
-.drop-page .stripe-preview[hidden],.checkout-open .product-breadcrumb,.checkout-open .drop-overview,.checkout-open .drop-more,.checkout-open .launch-footer,.checkout-open .site-header>nav,.checkout-open .site-header>.mobile-menu{display:none}
-.drop-page .stripe-preview{padding-top:24px;padding-bottom:56px;min-height:calc(100svh - 84px)}
-.checkout-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:32px}
+.drop-page .stripe-preview[hidden],.checkout-open .product-breadcrumb,.checkout-open .drop-overview,.checkout-open .drop-more,.drop-page.checkout-open footer.launch-footer,.checkout-open .site-header>nav,.checkout-open .site-header>.mobile-menu{display:none}
+.drop-page .stripe-preview{padding-top:32px;padding-bottom:56px;min-height:calc(100svh - 84px)}
 .checkout-back{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:8px 0;background:none;border:0;color:#d7dfd9;font:13px Alata,Arial,sans-serif;cursor:pointer}
 .checkout-back:hover{color:var(--cyan)}
 .checkout-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
 .checkout-heading .eyebrow{margin:0 0 10px;color:#aeb7b1}
 .checkout-heading h2{font-size:clamp(38px,5vw,56px);line-height:1.1}
 .checkout-heading h2:focus{outline:none}
+.checkout-heading-meta{display:flex;flex-direction:column;align-items:flex-end;gap:14px}
 .checkout-security{display:flex;align-items:center;gap:8px;font-size:12px;color:#aeb7b1;margin:0 0 4px}
 .checkout-security svg{flex-shrink:0}
 .checkout-preview-note{font-size:13px;line-height:1.75;color:#b5bfb8;margin:20px 0 28px;padding:14px 18px;border:1px solid #303a34;border-radius:4px;background:#151b17}
@@ -121,8 +121,9 @@
 @keyframes checkout-spin{to{transform:rotate(360deg)}}
 @media(max-width:600px){
  .drop-page .stripe-preview{padding-top:12px;min-height:calc(100svh - 72px)}
- .checkout-toolbar{margin-bottom:20px}
- .checkout-heading{align-items:flex-start;flex-direction:column;gap:12px}
+ .checkout-heading{align-items:flex-start;flex-direction:column;gap:14px}
+ .checkout-heading-meta{width:100%;flex-direction:row;align-items:center;justify-content:space-between;gap:8px}
+ .checkout-security{font-size:11px;margin:0}
  .checkout-heading h2{font-size:40px}
  .checkout-preview-note{margin:16px 0 20px;padding:12px 14px;font-size:12px}
  .checkout-help{align-items:flex-start;gap:14px}

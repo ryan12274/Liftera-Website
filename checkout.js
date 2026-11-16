@@ -123,7 +123,7 @@
   document.body.classList.add('checkout-open');
   section.hidden = false;
   button.setAttribute('aria-expanded', 'true');
-  if (headerLink) {headerLink.textContent = 'Back to product'; headerLink.setAttribute('href','#purchase');}
+  if (headerLink) {headerLink.textContent = '← Back to product'; headerLink.setAttribute('href','#purchase');}
   window.scrollTo({top:0, behavior:'instant'});
   heading.focus({preventScroll:true});
   if (phase === 'idle' || phase === 'error') start();
@@ -152,7 +152,6 @@
   }
   showCheckout();
  });
- document.getElementById('back-to-product').addEventListener('click', goBack);
  headerLink?.addEventListener('click', event => {
   if (!section.hidden) {event.preventDefault(); goBack();}
  });
