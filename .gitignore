@@ -1,0 +1,41 @@
+# Installed tools and local caches
+node_modules/
+.wrangler/
+.npm/
+
+# Local credentials and configuration
+.env
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Generated media, screenshots, and build output
+/outputs/
+/dist/
+/build/
+/coverage/
+/playwright-report/
+/test-results/
+
+# Customer exports and local databases
+*.csv
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+
+# Logs and editor / operating-system files
+*.log
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
